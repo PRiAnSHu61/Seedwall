@@ -12,7 +12,8 @@
     "render": "tsx --env-file=.env scripts/render.ts",
     "samples": "tsx scripts/samples.ts",
     "sync:drive": "tsx --env-file=.env scripts/sync-drive.ts",
-    "fonts:metrics": "tsx scripts/font-metrics.ts"
+    "fonts:metrics": "tsx scripts/font-metrics.ts",
+    "og": "tsx scripts/og.ts"
   },
   "dependencies": {
     "@resvg/resvg-js": "^2.6.2",

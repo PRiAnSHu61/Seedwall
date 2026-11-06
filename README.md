@@ -137,6 +137,7 @@ npx tsx scripts/render.ts --gen topographic --size 5120x2880 --params '{"bg":"#1
 npx tsx scripts/render.ts --gen geometric --preset bauhaus --device iphone --publish   # → public/gallery + manifest
 npm run samples       # regenerate 3 samples per generator
 npm run sync:drive    # refresh the Drive snapshot (fallback + real pixel sizes)
+npm run og            # regenerate social share images (public/og) and PWA icons (public/icons)
 ```
 
 Flags: `--gen --preset --all-presets --device --all-devices --size WxH --text "a|b|para" --no-text --seed --params JSON --theme <id> --format png|svg --out --publish --list`.
@@ -146,6 +147,13 @@ Flags: `--gen --preset --all-presets --device --all-devices --size WxH --text "a
 `NEXT_PUBLIC_DRIVE_URL` (in `.env`) points at the public Google Drive folder. The gallery reads it server-side through Drive's public embed listing (no API key), revalidating hourly. Each image gets a Drive thumbnail and a direct-download link. Files named `wallpaper-<colour>-<bold|dots|light>…` map to the matching cutting-mat preset, so "Open in Studio" recreates them, with `text.none` set for files in the "without text" folders. If Drive can't be reached, the gallery falls back to `src/data/drive-snapshot.json` (`npm run sync:drive`). If the variable is empty, "Download the full pack" shows a disabled "Link coming soon".
 
 To add wallpapers, drop PNGs into the Drive sub-folders. They appear on the site within an hour.
+
+## SEO
+
+- `src/config/seo.ts` holds the author, socials, keywords and a `pageMetadata()` helper. Every page gets a title, description, canonical URL, Open Graph and Twitter `summary_large_image` card.
+- `app/sitemap.ts` → `/sitemap.xml` (every page and generator), `app/robots.ts` → `/robots.txt`, `app/manifest.ts` → `/manifest.webmanifest`, `app/llms.txt` → a plain-text site map for LLM crawlers.
+- JSON-LD covers WebSite, WebApplication and Person (with `sameAs` links) on every page, ImageGallery on /gallery, and BreadcrumbList + CreativeWork on generator pages.
+- Share images (1200×630) are rendered by the generators themselves: run `npm run og` after adding a generator. A test fails if one is missing.
 
 ## Deploy to Vercel (seedwall.suryansh.work)
 

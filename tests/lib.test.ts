@@ -148,3 +148,20 @@ describe("syntax themes", () => {
     expect(applyTheme(g, p, "nope")).toEqual(p);
   });
 });
+
+describe("seo", () => {
+  it("sitemap lists every page and generator with absolute URLs", async () => {
+    const { default: sitemap } = await import("@/app/sitemap");
+    const { GENERATORS } = await import("@/generators");
+    const urls = sitemap().map((e) => e.url);
+    expect(urls).toContain("https://seedwall.suryansh.work/studio");
+    expect(urls).toContain("https://seedwall.suryansh.work/gallery");
+    for (const g of GENERATORS) expect(urls).toContain(`https://seedwall.suryansh.work/generators/${g.id}`);
+  });
+
+  it("has an OG image for every generator", async () => {
+    const { existsSync } = await import("node:fs");
+    const { GENERATORS } = await import("@/generators");
+    for (const f of ["default", "gallery", ...GENERATORS.map((g) => g.id)]) expect(existsSync(`public/og/${f}.png`), f).toBe(true);
+  });
+});

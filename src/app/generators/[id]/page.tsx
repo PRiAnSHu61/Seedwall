@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { JsonLd } from "@/components/JsonLd";
 import { LiveThumb } from "@/components/LiveThumb";
+import { AUTHOR, absoluteUrl, pageMetadata } from "@/config/seo";
 import { GENERATORS, getGenerator } from "@/generators";
 import type { ParamDef } from "@/generators/types";
 
@@ -13,7 +15,14 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const gen = getGenerator((await params).id);
-  return gen ? { title: gen.name, description: gen.description } : {};
+  if (!gen) return {};
+  return pageMetadata({
+    title: `${gen.name} wallpaper generator`,
+    description: `${gen.description} ${gen.presets.length} presets, editor themes, your own quote or none — free PNG downloads for any screen.`,
+    path: `/generators/${gen.id}`,
+    image: `/og/${gen.id}.png`,
+    imageAlt: `${gen.name} wallpaper made with Seedwall`,
+  });
 }
 
 function describe(def: ParamDef): string {
@@ -31,9 +40,34 @@ export default async function GeneratorPage({ params }: { params: Promise<{ id: 
   const gen = getGenerator((await params).id);
   if (!gen) notFound();
   const first = gen.presets[0];
+  const url = absoluteUrl(`/generators/${gen.id}`);
+  const structured = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Seedwall", item: absoluteUrl("/") },
+          { "@type": "ListItem", position: 2, name: "Generators", item: absoluteUrl("/#generators") },
+          { "@type": "ListItem", position: 3, name: gen.name, item: url },
+        ],
+      },
+      {
+        "@type": "CreativeWork",
+        name: `${gen.name} wallpaper generator`,
+        description: gen.description,
+        url,
+        image: absoluteUrl(`/og/${gen.id}.png`),
+        author: { "@type": "Person", name: AUTHOR.name, url: AUTHOR.url },
+        isAccessibleForFree: true,
+        keywords: gen.presets.map((p) => p.title).join(", "),
+      },
+    ],
+  };
 
   return (
     <div className="container">
+      <JsonLd data={structured} />
       <section className="gen-hero">
         <div>
           <span className="eyebrow">Generator · {gen.id}</span>
