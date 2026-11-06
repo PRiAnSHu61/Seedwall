@@ -12,8 +12,8 @@ type P = TextParams & {
 };
 
 const params: ParamSchema<P> = {
-  bg: { kind: "color", label: "Colour", default: "#f4efe6", group: "Background" },
-  bg2: { kind: "color", label: "Second colour", default: "#e7dccb", group: "Background" },
+  bg: { kind: "color", label: "Colour", default: "#f4efe6", group: "Background", role: "bg" },
+  bg2: { kind: "color", label: "Second colour", default: "#e7dccb", group: "Background", role: "accent" },
   fill: {
     kind: "select",
     label: "Fill",

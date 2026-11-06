@@ -20,8 +20,8 @@ type P = TextParams & {
 };
 
 const schema: ParamSchema<P> = {
-  bg: { kind: "color", label: "Mat colour", default: "#0a4fc5", group: "Colours" },
-  ink: { kind: "color", label: "Line colour", default: "#ffffff", group: "Colours" },
+  bg: { kind: "color", label: "Mat colour", default: "#0a4fc5", group: "Colours", role: "bg" },
+  ink: { kind: "color", label: "Line colour", default: "#ffffff", group: "Colours", role: "fg" },
   background: {
     kind: "select",
     label: "Background",

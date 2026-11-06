@@ -15,9 +15,9 @@ type P = TextParams & {
 };
 
 const params: ParamSchema<P> = {
-  bg: { kind: "color", label: "Background", default: "#f1ece2", group: "Colours" },
-  line: { kind: "color", label: "Line colour", default: "#2b2b2b", group: "Colours" },
-  line2: { kind: "color", label: "Index line colour", default: "#d1495b", group: "Colours" },
+  bg: { kind: "color", label: "Background", default: "#f1ece2", group: "Colours", role: "bg" },
+  line: { kind: "color", label: "Line colour", default: "#2b2b2b", group: "Colours", role: "fg" },
+  line2: { kind: "color", label: "Index line colour", default: "#d1495b", group: "Colours", role: "accent" },
   twoTone: { kind: "toggle", label: "Two-tone index lines", default: true, group: "Colours" },
   levels: { kind: "range", label: "Contour levels", min: 6, max: 40, step: 1, default: 22, group: "Terrain" },
   scale: { kind: "range", label: "Terrain scale", min: 0.6, max: 5, step: 0.1, default: 2, group: "Terrain" },

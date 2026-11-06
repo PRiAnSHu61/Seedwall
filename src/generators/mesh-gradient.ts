@@ -16,11 +16,11 @@ type P = TextParams & {
 };
 
 const params: ParamSchema<P> = {
-  bg: { kind: "color", label: "Base", default: "#ffd8c2", group: "Colours" },
-  c1: { kind: "color", label: "Colour 1", default: "#ff7a59", group: "Colours" },
-  c2: { kind: "color", label: "Colour 2", default: "#ffb3c7", group: "Colours" },
-  c3: { kind: "color", label: "Colour 3", default: "#7d5cff", group: "Colours" },
-  c4: { kind: "color", label: "Colour 4", default: "#ffd166", group: "Colours" },
+  bg: { kind: "color", label: "Base", default: "#ffd8c2", group: "Colours", role: "bg" },
+  c1: { kind: "color", label: "Colour 1", default: "#ff7a59", group: "Colours", role: "accent" },
+  c2: { kind: "color", label: "Colour 2", default: "#ffb3c7", group: "Colours", role: "accent" },
+  c3: { kind: "color", label: "Colour 3", default: "#7d5cff", group: "Colours", role: "accent" },
+  c4: { kind: "color", label: "Colour 4", default: "#ffd166", group: "Colours", role: "accent" },
   blobs: { kind: "range", label: "Blobs", min: 3, max: 10, step: 1, default: 6, group: "Shape" },
   softness: { kind: "range", label: "Softness", min: 6, max: 40, step: 1, default: 22, group: "Shape" },
   grain: { kind: "range", label: "Film grain", min: 0, max: 0.4, step: 0.01, default: 0.12, group: "Shape" },

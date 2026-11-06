@@ -15,7 +15,7 @@ type P = TextParams & {
 
 const params: ParamSchema<P> = {
   palette: { kind: "select", label: "Palette", options: PALETTE_OPTIONS, default: "bauhaus", group: "Colours" },
-  bg: { kind: "color", label: "Background", default: "#f1ede4", group: "Colours" },
+  bg: { kind: "color", label: "Background", default: "#f1ede4", group: "Colours", role: "bg" },
   shape: {
     kind: "select",
     label: "Shapes",

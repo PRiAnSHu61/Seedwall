@@ -15,6 +15,7 @@
  *   --no-text             hide all text
  *   --seed <n>            seed
  *   --params '<json>'     any other params, e.g. '{"bg":"#112233"}'
+ *   --theme <id>          recolour with a syntax theme (dracula, nord, tokyo-night, …)
  *   --format png|svg      output format (default png)
  *   --out <dir>           output directory (default out/)
  *   --publish             also write to public/gallery + manifest.json
@@ -22,7 +23,8 @@
  */
 import { parseArgs } from "node:util";
 import { DEVICES, clampDimension, getDevice } from "../src/config/devices";
-import { GENERATORS } from "../src/generators";
+import { GENERATORS, applyTheme, resolveParams } from "../src/generators";
+import { THEMES, getTheme } from "../src/generators/shared/themes";
 import { publish, render, requireGenerator, writeOutput, type Job } from "./lib/core";
 
 const { values } = parseArgs({
@@ -37,6 +39,7 @@ const { values } = parseArgs({
     "no-text": { type: "boolean", default: false },
     seed: { type: "string" },
     params: { type: "string" },
+    theme: { type: "string" },
     format: { type: "string", default: "png" },
     out: { type: "string", default: "out" },
     publish: { type: "boolean", default: false },
@@ -53,6 +56,7 @@ function fail(msg: string): never {
 if (values.list) {
   for (const g of GENERATORS) console.log(`${g.id.padEnd(14)} ${g.presets.map((p) => p.id).join(", ")}`);
   console.log(`\ndevices: ${DEVICES.map((d) => `${d.id} (${d.w}x${d.h})`).join(", ")}`);
+  console.log(`themes: ${THEMES.map((t) => t.id).join(", ")}`);
   process.exit(0);
 }
 
@@ -77,6 +81,8 @@ if (values.text !== undefined) {
 if (values["no-text"]) overrides["text.none"] = true;
 if (values.seed !== undefined) overrides.seed = values.seed;
 
+if (values.theme && !getTheme(values.theme)) fail(`unknown theme "${values.theme}" (see --list)`);
+
 const presets = values["all-presets"] ? gen.presets.map((p) => p.id) : [values.preset ?? gen.presets[0]?.id ?? ""];
 for (const p of presets) if (!gen.presets.some((x) => x.id === p)) fail(`unknown preset "${p}" for ${gen.id}`);
 
@@ -94,7 +100,9 @@ if (values.size) {
 
 for (const presetId of presets)
   for (const s of sizes) {
-    const job: Job = { gen, presetId, device: s.device, w: s.w, h: s.h, overrides };
+    // A theme recolours the preset, then explicit --params/--text still win.
+    const themed = values.theme ? { ...applyTheme(gen, resolveParams(gen, presetId), values.theme), ...overrides } : overrides;
+    const job: Job = { gen, presetId, device: s.device, w: s.w, h: s.h, overrides: themed };
     const t = Date.now();
     const r = render(job);
     const file = writeOutput(r, values.out, format);

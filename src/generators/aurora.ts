@@ -16,10 +16,10 @@ type P = TextParams & {
 };
 
 const params: ParamSchema<P> = {
-  bg: { kind: "color", label: "Sky", default: "#050816", group: "Colours" },
-  c1: { kind: "color", label: "Light 1", default: "#2cffb0", group: "Colours" },
-  c2: { kind: "color", label: "Light 2", default: "#3b82f6", group: "Colours" },
-  c3: { kind: "color", label: "Light 3", default: "#a855f7", group: "Colours" },
+  bg: { kind: "color", label: "Sky", default: "#050816", group: "Colours", role: "bg" },
+  c1: { kind: "color", label: "Light 1", default: "#2cffb0", group: "Colours", role: "accent" },
+  c2: { kind: "color", label: "Light 2", default: "#3b82f6", group: "Colours", role: "accent" },
+  c3: { kind: "color", label: "Light 3", default: "#a855f7", group: "Colours", role: "accent" },
   bands: { kind: "range", label: "Bands", min: 2, max: 7, step: 1, default: 4, group: "Aurora" },
   softness: { kind: "range", label: "Softness", min: 2, max: 14, step: 0.5, default: 6, group: "Aurora" },
   grain: { kind: "range", label: "Film grain", min: 0, max: 0.4, step: 0.01, default: 0.1, group: "Aurora" },

@@ -101,7 +101,7 @@ export function textParams(defaults: Partial<TextParams> = {}): ParamSchema<Text
       group: g,
     },
     "text.size": { kind: "range", label: "Text size", min: 1.5, max: 16, step: 0.1, default: defaults["text.size"] ?? 3.6, group: g },
-    "text.color": { kind: "color", label: "Text colour", default: defaults["text.color"] ?? "#ffffff", group: g },
+    "text.color": { kind: "color", label: "Text colour", default: defaults["text.color"] ?? "#ffffff", group: g, role: "fg" },
   };
 }
 

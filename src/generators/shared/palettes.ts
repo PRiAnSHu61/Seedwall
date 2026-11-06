@@ -1,5 +1,7 @@
+import { THEMES } from "./themes";
+
 /** Named palettes shared by generators that take a "palette" select. */
-export const PALETTES = {
+const BASE_PALETTES = {
   sunset: ["#ff6b6b", "#feca57", "#ff9ff3", "#5f27cd", "#1dd1a1"],
   ocean: ["#0b132b", "#1c2541", "#3a506b", "#5bc0be", "#e0fbfc"],
   bauhaus: ["#f1ede4", "#d7263d", "#1b998b", "#f4b400", "#1d3557"],
@@ -10,13 +12,17 @@ export const PALETTES = {
   electric: ["#05060f", "#1f4bff", "#7a5cff", "#00d4ff", "#e8ecff"],
 } as const satisfies Record<string, readonly string[]>;
 
-export type PaletteName = keyof typeof PALETTES;
+/** Base palettes plus one per syntax theme (its accents), keyed by theme id. */
+export const PALETTES: Readonly<Record<string, readonly string[]>> = {
+  ...BASE_PALETTES,
+  ...Object.fromEntries(THEMES.map((t) => [t.id, t.accents])),
+};
 
-export const PALETTE_OPTIONS = (Object.keys(PALETTES) as PaletteName[]).map((k) => ({
-  value: k,
-  label: k[0]!.toUpperCase() + k.slice(1),
-}));
+export const PALETTE_OPTIONS = [
+  ...Object.keys(BASE_PALETTES).map((k) => ({ value: k, label: k[0]!.toUpperCase() + k.slice(1) })),
+  ...THEMES.map((t) => ({ value: t.id, label: `${t.name} (theme)` })),
+];
 
 export function palette(name: string): readonly string[] {
-  return (PALETTES as Record<string, readonly string[]>)[name] ?? PALETTES.mono;
+  return PALETTES[name] ?? BASE_PALETTES.mono;
 }

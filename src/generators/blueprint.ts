@@ -16,8 +16,8 @@ type P = TextParams & {
 };
 
 const params: ParamSchema<P> = {
-  bg: { kind: "color", label: "Paper", default: "#123a73", group: "Colours" },
-  ink: { kind: "color", label: "Ink", default: "#d8e7ff", group: "Colours" },
+  bg: { kind: "color", label: "Paper", default: "#123a73", group: "Colours", role: "bg" },
+  ink: { kind: "color", label: "Ink", default: "#d8e7ff", group: "Colours", role: "fg" },
   grid: { kind: "range", label: "Grid size", min: 2, max: 10, step: 0.5, default: 5, group: "Drawing" },
   parts: { kind: "range", label: "Parts", min: 0, max: 8, step: 1, default: 3, group: "Drawing" },
   dims: { kind: "range", label: "Dimension lines", min: 0, max: 14, step: 1, default: 6, group: "Drawing" },

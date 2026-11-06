@@ -16,10 +16,10 @@ type P = TextParams & {
 };
 
 const params: ParamSchema<P> = {
-  bg: { kind: "color", label: "Background", default: "#0d1117", group: "Colours" },
-  fg: { kind: "color", label: "Text", default: "#c9d1d9", group: "Colours" },
-  accent: { kind: "color", label: "Keywords", default: "#ff7b72", group: "Colours" },
-  accent2: { kind: "color", label: "Strings", default: "#a5d6ff", group: "Colours" },
+  bg: { kind: "color", label: "Background", default: "#0d1117", group: "Colours", role: "bg" },
+  fg: { kind: "color", label: "Text", default: "#c9d1d9", group: "Colours", role: "fg" },
+  accent: { kind: "color", label: "Keywords", default: "#ff7b72", group: "Colours", role: "accent" },
+  accent2: { kind: "color", label: "Strings", default: "#a5d6ff", group: "Colours", role: "accent" },
   window: { kind: "toggle", label: "Window chrome", default: true, group: "Terminal" },
   code: { kind: "range", label: "Code visibility", min: 0, max: 0.5, step: 0.01, default: 0.24, group: "Terminal" },
   prompt: { kind: "text", label: "Prompt line", default: "~/projects/seedwall $ npm run ship", group: "Terminal", maxLength: 80 },

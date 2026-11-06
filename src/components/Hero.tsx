@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { DrivePackButton } from "./DrivePackButton";
 import { LiveThumb } from "./LiveThumb";
+import { GENERATORS } from "@/generators";
+import { THEMES } from "@/generators/shared/themes";
 
 export function Hero() {
   return (
@@ -15,8 +17,9 @@ export function Hero() {
             from a <em>seed</em>.
           </h1>
           <p className="lead">
-            Nine generators, from drafting-table cutting mats to aurora light. Change the colours, write your own quote or go text-free,
-            then download a pixel-perfect PNG for any screen.
+            {GENERATORS.length} generators, from drafting-table cutting mats and flow fields to git graphs and synthwave suns. Change
+            the colours, apply one of {THEMES.length} editor themes, write your own quote or go text-free, then download a
+            pixel-perfect PNG for any screen.
           </p>
           <div className="hero-actions">
             <Link className="btn btn-primary" href="/studio">Open the studio</Link>

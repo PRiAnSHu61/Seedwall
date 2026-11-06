@@ -57,7 +57,7 @@ describe.each(GENERATORS.map((g) => [g.id, g] as const))("%s", (_id, gen) => {
 });
 
 describe("seed sensitivity", () => {
-  it.each(["cutting-mat", "mesh-gradient", "topographic", "blueprint", "terminal", "geometric", "aurora"])("%s changes with the seed", (id) => {
+  it.each(["cutting-mat", "mesh-gradient", "topographic", "blueprint", "terminal", "geometric", "aurora", "flow-field", "wave-lines", "landscape", "truchet", "git-graph", "circuit"])("%s changes with the seed", (id) => {
     const gen = GENERATORS.find((g) => g.id === id)!;
     const a = renderWallpaper(gen, resolveParams(gen, gen.presets[0]?.id, { seed: 1 }), { w: 1600, h: 1000 });
     const b = renderWallpaper(gen, resolveParams(gen, gen.presets[0]?.id, { seed: 2 }), { w: 1600, h: 1000 });

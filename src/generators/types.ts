@@ -9,7 +9,9 @@ interface BaseDef {
   help?: string;
 }
 
-export interface ColorDef extends BaseDef { kind: "color"; default: string }
+/** What a colour is for — lets a syntax theme recolour any generator. */
+export type ColorRole = "bg" | "fg" | "accent";
+export interface ColorDef extends BaseDef { kind: "color"; default: string; role?: ColorRole }
 export interface SelectDef extends BaseDef {
   kind: "select";
   options: readonly { value: string; label: string }[];

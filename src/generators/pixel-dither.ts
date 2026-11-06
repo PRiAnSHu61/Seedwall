@@ -15,10 +15,10 @@ type P = TextParams & {
 };
 
 const params: ParamSchema<P> = {
-  c1: { kind: "color", label: "Colour 1", default: "#1b1033", group: "Colours" },
-  c2: { kind: "color", label: "Colour 2", default: "#6a2c91", group: "Colours" },
-  c3: { kind: "color", label: "Colour 3", default: "#f25f5c", group: "Colours" },
-  c4: { kind: "color", label: "Colour 4", default: "#ffe066", group: "Colours" },
+  c1: { kind: "color", label: "Colour 1", default: "#1b1033", group: "Colours", role: "bg" },
+  c2: { kind: "color", label: "Colour 2", default: "#6a2c91", group: "Colours", role: "accent" },
+  c3: { kind: "color", label: "Colour 3", default: "#f25f5c", group: "Colours", role: "accent" },
+  c4: { kind: "color", label: "Colour 4", default: "#ffe066", group: "Colours", role: "accent" },
   colors: { kind: "select", label: "Colours used", default: "4", group: "Colours", options: [{ value: "2", label: "2" }, { value: "3", label: "3" }, { value: "4", label: "4" }] },
   direction: {
     kind: "select",

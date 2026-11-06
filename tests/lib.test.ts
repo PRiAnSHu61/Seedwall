@@ -114,3 +114,37 @@ describe("svg id scoping", () => {
     expect(scopeSvgIds(`<mask id="m"/><g mask="url(#m)"/>`, "s")).toBe(`<mask id="s-m"/><g mask="url(#s-m)"/>`);
   });
 });
+
+describe("syntax themes", () => {
+  it("recolours every generator by role and stays valid", async () => {
+    const { GENERATORS, applyTheme, renderWallpaper, resolveParams } = await import("@/generators");
+    const { THEMES } = await import("@/generators/shared/themes");
+    const { XMLValidator } = await import("fast-xml-parser");
+    for (const gen of GENERATORS)
+      for (const theme of THEMES) {
+        const p = applyTheme(gen, resolveParams(gen, gen.presets[0]?.id), theme.id);
+        for (const [key, def] of Object.entries(gen.params)) {
+          if (def.kind !== "color") continue;
+          if (def.role === "bg") expect(p[key], `${gen.id}.${key}`).toBe(theme.bg);
+          if (def.role === "fg") expect(p[key], `${gen.id}.${key}`).toBe(theme.fg);
+          if (def.role === "accent") expect(theme.accents).toContain(p[key]);
+        }
+        expect(XMLValidator.validate(renderWallpaper(gen, p, { w: 800, h: 500 }))).toBe(true);
+      }
+  });
+
+  it("every generator has a themable background", async () => {
+    const { GENERATORS } = await import("@/generators");
+    for (const gen of GENERATORS) {
+      const roles = Object.values(gen.params).flatMap((d) => (d.kind === "color" && d.role ? [d.role] : []));
+      expect(roles, gen.id).toContain("bg");
+    }
+  });
+
+  it("ignores unknown themes", async () => {
+    const { applyTheme, getGenerator, resolveParams } = await import("@/generators");
+    const g = getGenerator("aurora")!;
+    const p = resolveParams(g, "borealis");
+    expect(applyTheme(g, p, "nope")).toEqual(p);
+  });
+});

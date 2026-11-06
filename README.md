@@ -49,8 +49,8 @@ import { clearZonesMask, layoutText, textParams, type TextParams } from "./share
 type P = TextParams & { bg: string; fg: string; width: number; angle: number; seed: number };
 
 const params: ParamSchema<P> = {
-  bg: { kind: "color", label: "Background", default: "#111111", group: "Colours" },
-  fg: { kind: "color", label: "Stripe", default: "#2457ff", group: "Colours" },
+  bg: { kind: "color", label: "Background", default: "#111111", group: "Colours", role: "bg" },
+  fg: { kind: "color", label: "Stripe", default: "#2457ff", group: "Colours", role: "accent" },
   width: { kind: "range", label: "Stripe width", min: 1, max: 20, step: 0.5, default: 6, group: "Stripes" },
   angle: { kind: "range", label: "Angle", min: 0, max: 180, step: 1, default: 30, group: "Stripes" },
   seed: { kind: "seed", label: "Seed", default: 1 },
@@ -97,7 +97,13 @@ import { stripes } from "./stripes";
   reg(stripes),
 ```
 
+Give every colour a `role` (`"bg"`, `"fg"` or `"accent"`) so the syntax themes can recolour it. The tests fail if a generator has no themable background.
+
 That's all. The studio controls, generator page, home card, CLI (`--gen stripes`) and the test matrix pick it up automatically. Prefix SVG ids (`st-…`) so they don't clash with other generators. The studio scopes ids per instance anyway. Run `npm test` to check it produces valid, deterministic SVG on every device.
+
+## Syntax themes
+
+`src/generators/shared/themes.ts` holds Dracula, Nord, Tokyo Night, Gruvbox, Catppuccin Mocha, One Dark, Rosé Pine, Solarized Dark and GitHub Light. `applyTheme(gen, params, id)` maps any generator's colours by role: `bg` → theme background, `fg` → theme foreground, and `accent` → the theme's accents in order. A `palette` select is also set to the theme. In the studio they're one-click chips; in the CLI use `--theme tokyo-night`. To add a theme, append one entry with `bg`, `fg` and six accents.
 
 ## Add a device
 
@@ -126,13 +132,14 @@ npx tsx scripts/render.ts --list
 npx tsx scripts/render.ts --gen cutting-mat --preset blue-bold --device macbook14 \
   --text "Small commits.|Big momentum.|A short paragraph" --seed 7 --out out/
 npx tsx scripts/render.ts --gen aurora --all-presets --all-devices --no-text
+npx tsx scripts/render.ts --gen flow-field --theme tokyo-night --device 4k
 npx tsx scripts/render.ts --gen topographic --size 5120x2880 --params '{"bg":"#101820","line":"#fee715"}'
 npx tsx scripts/render.ts --gen geometric --preset bauhaus --device iphone --publish   # → public/gallery + manifest
 npm run samples       # regenerate 3 samples per generator
 npm run sync:drive    # refresh the Drive snapshot (fallback + real pixel sizes)
 ```
 
-Flags: `--gen --preset --all-presets --device --all-devices --size WxH --text "a|b|para" --no-text --seed --params JSON --format png|svg --out --publish --list`.
+Flags: `--gen --preset --all-presets --device --all-devices --size WxH --text "a|b|para" --no-text --seed --params JSON --theme <id> --format png|svg --out --publish --list`.
 
 ## The Drive pack
 

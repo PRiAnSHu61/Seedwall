@@ -1,5 +1,6 @@
 import type { AnyGenerator, ParamDef, Params, ParamValue, Size } from "./types";
 import { createRng } from "./shared/rng";
+import { getTheme } from "./shared/themes";
 
 /** Schema defaults for a generator. */
 export function defaultParams(gen: AnyGenerator): Params {
@@ -58,5 +59,25 @@ export function diffFromPreset(gen: AnyGenerator, presetId: string | undefined, 
   const base = resolveParams(gen, presetId);
   const out: Params = {};
   for (const [k, v] of Object.entries(params)) if (base[k] !== v) out[k] = v;
+  return out;
+}
+
+/**
+ * Recolours params with a syntax theme: role "bg" → theme bg, "fg" → theme fg,
+ * "accent" → theme accents in order. A "palette" select is set to the theme too.
+ * Params without a role are left alone, so it's safe on any generator.
+ */
+export function applyTheme(gen: AnyGenerator, params: Params, themeId: string): Params {
+  const theme = getTheme(themeId);
+  if (!theme) return params;
+  const out: Params = { ...params };
+  let k = 0;
+  for (const [key, def] of Object.entries(gen.params)) {
+    if (def.kind === "color" && def.role) {
+      out[key] = def.role === "bg" ? theme.bg : def.role === "fg" ? theme.fg : theme.accents[k++ % theme.accents.length] ?? theme.fg;
+    } else if (def.kind === "select" && key === "palette" && def.options.some((o) => o.value === theme.id)) {
+      out[key] = theme.id;
+    }
+  }
   return out;
 }

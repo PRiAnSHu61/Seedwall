@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { GENERATORS, getGenerator, renderWallpaper, resolveParams, type ParamValue } from "@/generators";
+import { GENERATORS, applyTheme, getGenerator, renderWallpaper, resolveParams, type ParamValue } from "@/generators";
+import { getTheme } from "@/generators/shared/themes";
 import { decodeState, encodeState, initialState, type StudioState } from "@/lib/studioState";
 import { scopeSvgIds } from "@/lib/scopeSvg";
 import { downloadBlob, svgToPngBlob } from "@/lib/svgToPng";
@@ -14,6 +15,7 @@ import { ParamsPanel } from "./ParamsPanel";
 import { Preview } from "./Preview";
 import { LiveThumb } from "./LiveThumb";
 import { CollectionPanel } from "./CollectionPanel";
+import { ThemePicker } from "./ThemePicker";
 
 export function Studio() {
   const search = useSearchParams();
@@ -170,6 +172,18 @@ export function Studio() {
         <section className="col-section">
           <span className="label">Device</span>
           <DevicePicker device={state.device} w={state.w} h={state.h} onChange={(device, w, h) => setState((s) => ({ ...s, device, w, h }))} />
+        </section>
+        <section className="col-section">
+          <span className="label">Syntax theme</span>
+          <ThemePicker
+            onApply={(id) => {
+              setState((s) => {
+                const g = getGenerator(s.gen);
+                return g ? { ...s, params: applyTheme(g, s.params, id) } : s;
+              });
+              setToast(`Applied ${getTheme(id)?.name ?? id}`);
+            }}
+          />
         </section>
         <section className="col-section">
           <ParamsPanel gen={gen} params={state.params} onChange={setParam} />
