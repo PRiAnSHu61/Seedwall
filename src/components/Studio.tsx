@@ -7,7 +7,7 @@ import { getTheme } from "@/generators/shared/themes";
 import { decodeState, encodeState, initialState, type StudioState } from "@/lib/studioState";
 import { scopeSvgIds } from "@/lib/scopeSvg";
 import { downloadBlob, svgToPngBlob } from "@/lib/svgToPng";
-import { buildClaudePrompt, buildCliCommand } from "@/lib/prompt";
+import { buildCliCommand } from "@/lib/prompt";
 import { useDebounced } from "@/lib/useDebounced";
 import { saveToCollection } from "@/lib/collection";
 import { DevicePicker } from "./DevicePicker";
@@ -158,9 +158,6 @@ export function Studio() {
         <div className="stage-bar">
           <p className="preview-dims">Rendered from code · deterministic for seed {String(state.params.seed ?? "—")}</p>
           <div className="actions">
-            <button type="button" className="btn btn-sm btn-ghost" onClick={() => copy(buildClaudePrompt(state, shareUrl()), "Claude Code prompt copied")}>
-              Copy Claude Code prompt
-            </button>
             <button type="button" className="btn btn-sm btn-ghost" onClick={() => copy(buildCliCommand(state), "CLI command copied")}>
               Copy CLI command
             </button>
