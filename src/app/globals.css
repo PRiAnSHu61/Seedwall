@@ -325,6 +325,13 @@ dialog.wp-dialog::backdrop { background: rgb(0 0 0 / 0.6); }
 .dialog-close { position: absolute; top: 10px; right: 10px; }
 @media (max-width: 760px) { .dialog-body { grid-template-columns: 1fr; } .dialog-side { border-left: 0; border-top: 1px solid var(--line); } }
 
+/* ---------- 404 ---------- */
+.nf { padding-top: 40px; display: grid; gap: 28px; }
+.nf-art { aspect-ratio: 16 / 10; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); line-height: 0; }
+.nf-art svg { width: 100%; height: 100%; display: block; }
+.nf-body h1 { font-size: clamp(32px, 5vw, 52px); margin-top: 6px; }
+.nf-body p { color: var(--muted); margin-top: 12px; max-width: 60ch; font-size: 16px; }
+
 /* ---------- generator page ---------- */
 .gen-hero { display: grid; grid-template-columns: 1fr 1.2fr; gap: 32px; align-items: center; padding: 40px 0 8px; }
 .gen-hero .card-media { border-radius: var(--radius); border: 1px solid var(--line); }

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>You're offline · Seedwall</title>
+<style>
+  @font-face { font-family: "SW Grotesk"; src: url("/fonts/SchibstedGrotesk-Regular.ttf") format("truetype"); font-display: swap; }
+  @font-face { font-family: "SW Mono"; src: url("/fonts/JetBrainsMono-Regular.ttf") format("truetype"); font-display: swap; }
+  :root { --bg: #0d0e11; --ink: #eceef2; --muted: #9a9fab; --accent: #4f7bff; --line: rgb(255 255 255 / 0.1); }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--bg); color: var(--ink); font-family: "SW Grotesk", system-ui, sans-serif; overflow: hidden; }
+  canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; cursor: pointer; }
+  .card {
+    position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: min(520px, calc(100vw - 32px)); padding: 28px 28px 24px; border-radius: 10px;
+    background: rgb(13 14 17 / 0.86); border: 1px solid var(--line); backdrop-filter: blur(10px);
+    box-shadow: 0 20px 60px rgb(0 0 0 / 0.5);
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -0.02em; font-size: 18px; }
+  .brand b { color: var(--accent); font-weight: 700; }
+  .eyebrow { margin-top: 22px; font: 500 11px "SW Mono", ui-monospace, monospace; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+  h1 { margin: 8px 0 10px; font-size: clamp(30px, 6vw, 42px); line-height: 1.05; letter-spacing: -0.035em; }
+  p { margin: 0; color: var(--muted); line-height: 1.55; font-size: 15px; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; align-items: center; }
+  button {
+    height: 38px; padding: 0 16px; border-radius: 4px; border: 1px solid rgb(255 255 255 / 0.22); background: transparent;
+    color: var(--ink); font: 500 14px "SW Grotesk", system-ui, sans-serif; cursor: pointer;
+  }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .seed { margin-left: auto; font: 12px "SW Mono", ui-monospace, monospace; color: var(--muted); }
+  .status { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font: 12px "SW Mono", ui-monospace, monospace; color: var(--muted); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #ff6b6b; box-shadow: 0 0 0 0 rgb(255 107 107 / 0.6); animation: pulse 1.8s infinite; }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 8px rgb(255 107 107 / 0); } 100% { box-shadow: 0 0 0 0 rgb(255 107 107 / 0); } }
+  @media (prefers-reduced-motion: reduce) { .dot { animation: none; } }
+</style>
+</head>
+<body>
+<canvas id="c" aria-hidden="true"></canvas>
+<main class="card" role="main">
+  <div class="brand">
+    <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="7" fill="#4f7bff"/><path d="M1 11.5H31M1 20.5H31M11.5 1V31M20.5 1V31" stroke="#fff" stroke-opacity=".14" stroke-width=".8"/><path d="M8.4 23.6L10.6 21.4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/><circle cx="5.8" cy="26.2" r="1.7" fill="#fff"/><path d="M12 20C8.8 16.8 9.6 11.6 13.6 8.6C16.4 6.5 21.6 5.6 25.4 6.6C26.4 10.4 25.5 15.6 23.4 18.4C20.4 22.4 15.2 23.2 12 20Z" fill="#fff"/><path d="M14.6 17.4C16.6 15.4 18.8 13.2 21.4 10.6" stroke="#4f7bff" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <span>Seed<b>wall</b></span>
+  </div>
+  <div class="eyebrow">No connection</div>
+  <h1>You're offline.<br>The seeds still grow.</h1>
+  <p>Seedwall can't reach the network right now. The pattern behind this card is drawn on your device, so tap anywhere to grow a new one while you wait. The page reloads as soon as you're back online.</p>
+  <div class="row">
+    <button class="primary" id="retry" type="button">Try again</button>
+    <button id="grow" type="button">Grow another</button>
+    <span class="seed" id="seed"></span>
+  </div>
+  <div class="status" role="status" aria-live="polite"><span class="dot" aria-hidden="true"></span><span id="msg">Waiting for the network…</span></div>
+</main>
+<script>
+(() => {
+  const PALETTES = [
+    ["#0d0e11", "#4f7bff", "#7ee0c3"], ["#1a1b26", "#bb9af7", "#ff9e64"], ["#0b0221", "#ff2a6d", "#05d9e8"],
+    ["#101418", "#7ee0c3", "#7aa2f7"], ["#1d1013", "#ffb38a", "#ff4d6d"], ["#06141f", "#4cc9f0", "#e0fbfc"],
+  ];
+  const c = document.getElementById("c");
+  const ctx = c.getContext("2d");
+  const seedEl = document.getElementById("seed");
+  let seed = Math.floor(Math.random() * 1e6);
+
+  // mulberry32 — the same PRNG Seedwall's generators use.
+  const rng = (s) => () => { s = (s + 0x6d2b79f5) >>> 0; let t = s; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+
+  function draw() {
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    const w = innerWidth, h = innerHeight;
+    c.width = w * dpr; c.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const r = rng(seed);
+    const [bg, a, b] = PALETTES[Math.floor(r() * PALETTES.length)];
+    document.documentElement.style.setProperty("--accent", a);
+    ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h);
+    const s = Math.max(28, Math.min(w, h) / (10 + r() * 10));
+    const grad = ctx.createLinearGradient(0, 0, w, h); grad.addColorStop(0, a); grad.addColorStop(1, b);
+    ctx.strokeStyle = grad; ctx.lineWidth = s * (0.12 + r() * 0.12); ctx.lineCap = "round"; ctx.globalAlpha = 0.85;
+    ctx.beginPath();
+    for (let y = 0; y < h + s; y += s) for (let x = 0; x < w + s; x += s) {
+      const hh = s / 2;
+      if (r() < 0.5) { ctx.moveTo(x + hh, y); ctx.arc(x, y, hh, 0, Math.PI / 2); ctx.moveTo(x + s, y + hh); ctx.arc(x + s, y + s, hh, -Math.PI / 2, -Math.PI, true); }
+      else { ctx.moveTo(x + s, y + hh); ctx.arc(x + s, y, hh, Math.PI / 2, Math.PI); ctx.moveTo(x, y + hh); ctx.arc(x, y + s, hh, -Math.PI / 2, 0); }
+    }
+    ctx.stroke(); ctx.globalAlpha = 1;
+    seedEl.textContent = "seed #" + seed;
+  }
+  const grow = () => { seed = Math.floor(Math.random() * 1e6); draw(); };
+
+  document.getElementById("grow").addEventListener("click", grow);
+  c.addEventListener("click", grow);
+  addEventListener("keydown", (e) => { if (e.key === " " && e.target === document.body) { e.preventDefault(); grow(); } });
+  addEventListener("resize", draw);
+  document.getElementById("retry").addEventListener("click", () => location.reload());
+  addEventListener("online", () => { document.getElementById("msg").textContent = "Back online — reloading…"; setTimeout(() => location.reload(), 600); });
+  draw();
+})();
+</script>
+</body>
+</html>
