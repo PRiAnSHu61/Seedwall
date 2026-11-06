@@ -3,7 +3,6 @@ import { describe, expect, it } from "vitest";
 import { getGenerator, resolveParams } from "@/generators";
 import { layoutText, measure, parseRuns, type TextParams } from "@/generators/shared/text";
 import { decodeState, encodeState, initialState } from "@/lib/studioState";
-import { buildCliCommand } from "@/lib/prompt";
 import { validateManifest } from "@/lib/gallery";
 import { parseFolderHtml, toGalleryItem } from "@/lib/drive";
 import { scopeSvgIds } from "@/lib/scopeSvg";
@@ -73,15 +72,6 @@ describe("text layout", () => {
   });
 });
 
-describe("cli command", () => {
-  it("includes only changed params", () => {
-    const s = initialState("cutting-mat", "blue-bold");
-    s.params = { ...s.params, bg: "#000000" };
-    const cmd = buildCliCommand(s);
-    expect(cmd).toContain("--gen cutting-mat --preset blue-bold --device macbook14");
-    expect(cmd).toContain(`--params '{"bg":"#000000"}'`);
-  });
-});
 
 describe("gallery data", () => {
   it("public/gallery/manifest.json is valid", () => {

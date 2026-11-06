@@ -2,7 +2,7 @@
 
 Browse, customise and generate desktop and phone wallpapers — **https://seedwall.suryansh.work**
 
-- **/studio**: pick a generator and preset, then change colours, text (or go text-free), device and seed. Download a full-size PNG or SVG, copy a share link, save to your collection, or copy the CLI command.
+- **/studio**: pick a generator and preset, then change colours, text (or go text-free), device and seed. Download a full-size PNG or SVG, copy a share link, or save to your collection.
 - **/gallery**: the Cutting Mat pack, read live from the shared Google Drive folder (refreshed hourly, with direct downloads), plus generated samples. Filter by generator, device, tag and text-free.
 - **/generators/[id]**: one page per look, showing its presets and parameter table.
 
