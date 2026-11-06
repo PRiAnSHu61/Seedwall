@@ -1,0 +1,542 @@
+[
+  {
+    "id": "cutting-mat-blue-bold-1440p",
+    "title": "Cutting Mat · Blue · Bold",
+    "generator": "cutting-mat",
+    "presetId": "blue-bold",
+    "params": {},
+    "device": "1440p",
+    "width": 2560,
+    "height": 1440,
+    "tags": [
+      "cutting-mat",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/cutting-mat-blue-bold-1440p-preview.webp",
+    "downloadUrl": "/gallery/cutting-mat-blue-bold-1440p.png",
+    "hasTextFree": false,
+    "createdAt": "2026-11-06T20:26:10.728Z",
+    "source": "samples"
+  },
+  {
+    "id": "cutting-mat-blue-light-iphone",
+    "title": "Cutting Mat · Blue · Light",
+    "generator": "cutting-mat",
+    "presetId": "blue-light",
+    "params": {},
+    "device": "iphone",
+    "width": 1290,
+    "height": 2796,
+    "tags": [
+      "cutting-mat",
+      "phone",
+      "sample"
+    ],
+    "previewUrl": "/gallery/cutting-mat-blue-light-iphone-preview.webp",
+    "downloadUrl": "/gallery/cutting-mat-blue-light-iphone.png",
+    "hasTextFree": false,
+    "createdAt": "2026-11-06T20:26:11.777Z",
+    "source": "samples"
+  },
+  {
+    "id": "cutting-mat-blue-dots-macbook14",
+    "title": "Cutting Mat · Blue · Dots",
+    "generator": "cutting-mat",
+    "presetId": "blue-dots",
+    "params": {},
+    "device": "macbook14",
+    "width": 3024,
+    "height": 1964,
+    "tags": [
+      "cutting-mat",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/cutting-mat-blue-dots-macbook14-preview.webp",
+    "downloadUrl": "/gallery/cutting-mat-blue-dots-macbook14.png",
+    "hasTextFree": false,
+    "createdAt": "2026-11-06T20:26:13.409Z",
+    "source": "samples"
+  },
+  {
+    "id": "mesh-gradient-peach-1440p-notext",
+    "title": "Mesh Gradient · Peach",
+    "generator": "mesh-gradient",
+    "presetId": "peach",
+    "params": {},
+    "device": "1440p",
+    "width": 2560,
+    "height": 1440,
+    "tags": [
+      "mesh-gradient",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/mesh-gradient-peach-1440p-notext-preview.webp",
+    "downloadUrl": "/gallery/mesh-gradient-peach-1440p-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-06T20:26:15.472Z",
+    "source": "samples"
+  },
+  {
+    "id": "mesh-gradient-lagoon-iphone-notext",
+    "title": "Mesh Gradient · Lagoon",
+    "generator": "mesh-gradient",
+    "presetId": "lagoon",
+    "params": {},
+    "device": "iphone",
+    "width": 1290,
+    "height": 2796,
+    "tags": [
+      "mesh-gradient",
+      "phone",
+      "sample"
+    ],
+    "previewUrl": "/gallery/mesh-gradient-lagoon-iphone-notext-preview.webp",
+    "downloadUrl": "/gallery/mesh-gradient-lagoon-iphone-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-06T20:26:17.018Z",
+    "source": "samples"
+  },
+  {
+    "id": "mesh-gradient-violet-dusk-macbook14-notext",
+    "title": "Mesh Gradient · Violet dusk",
+    "generator": "mesh-gradient",
+    "presetId": "violet-dusk",
+    "params": {},
+    "device": "macbook14",
+    "width": 3024,
+    "height": 1964,
+    "tags": [
+      "mesh-gradient",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/mesh-gradient-violet-dusk-macbook14-notext-preview.webp",
+    "downloadUrl": "/gallery/mesh-gradient-violet-dusk-macbook14-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-06T20:26:19.882Z",
+    "source": "samples"
+  },
+  {
+    "id": "topographic-survey-1440p",
+    "title": "Topographic · Survey map",
+    "generator": "topographic",
+    "presetId": "survey",
+    "params": {},
+    "device": "1440p",
+    "width": 2560,
+    "height": 1440,
+    "tags": [
+      "topographic",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/topographic-survey-1440p-preview.webp",
+    "downloadUrl": "/gallery/topographic-survey-1440p.png",
+    "hasTextFree": false,
+    "createdAt": "2026-11-06T20:26:20.129Z",
+    "source": "samples"
+  },
+  {
+    "id": "topographic-night-ridge-iphone-notext",
+    "title": "Topographic · Night ridge",
+    "generator": "topographic",
+    "presetId": "night-ridge",
+    "params": {},
+    "device": "iphone",
+    "width": 1290,
+    "height": 2796,
+    "tags": [
+      "topographic",
+      "phone",
+      "sample"
+    ],
+    "previewUrl": "/gallery/topographic-night-ridge-iphone-notext-preview.webp",
+    "downloadUrl": "/gallery/topographic-night-ridge-iphone-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-06T20:26:20.372Z",
+    "source": "samples"
+  },
+  {
+    "id": "topographic-moss-macbook14",
+    "title": "Topographic · Moss",
+    "generator": "topographic",
+    "presetId": "moss",
+    "params": {},
+    "device": "macbook14",
+    "width": 3024,
+    "height": 1964,
+    "tags": [
+      "topographic",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/topographic-moss-macbook14-preview.webp",
+    "downloadUrl": "/gallery/topographic-moss-macbook14.png",
+    "hasTextFree": false,
+    "createdAt": "2026-11-06T20:26:20.766Z",
+    "source": "samples"
+  },
+  {
+    "id": "blueprint-classic-1440p",
+    "title": "Blueprint · Classic blueprint",
+    "generator": "blueprint",
+    "presetId": "classic",
+    "params": {},
+    "device": "1440p",
+    "width": 2560,
+    "height": 1440,
+    "tags": [
+      "blueprint",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/blueprint-classic-1440p-preview.webp",
+    "downloadUrl": "/gallery/blueprint-classic-1440p.png",
+    "hasTextFree": false,
+    "createdAt": "2026-11-06T20:26:20.979Z",
+    "source": "samples"
+  },
+  {
+    "id": "blueprint-midnight-iphone",
+    "title": "Blueprint · Midnight",
+    "generator": "blueprint",
+    "presetId": "midnight",
+    "params": {},
+    "device": "iphone",
+    "width": 1290,
+    "height": 2796,
+    "tags": [
+      "blueprint",
+      "phone",
+      "sample"
+    ],
+    "previewUrl": "/gallery/blueprint-midnight-iphone-preview.webp",
+    "downloadUrl": "/gallery/blueprint-midnight-iphone.png",
+    "hasTextFree": false,
+    "createdAt": "2026-11-06T20:26:21.184Z",
+    "source": "samples"
+  },
+  {
+    "id": "blueprint-cyanotype-macbook14-notext",
+    "title": "Blueprint · Cyanotype",
+    "generator": "blueprint",
+    "presetId": "cyanotype",
+    "params": {},
+    "device": "macbook14",
+    "width": 3024,
+    "height": 1964,
+    "tags": [
+      "blueprint",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/blueprint-cyanotype-macbook14-notext-preview.webp",
+    "downloadUrl": "/gallery/blueprint-cyanotype-macbook14-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-06T20:26:21.497Z",
+    "source": "samples"
+  },
+  {
+    "id": "terminal-github-dark-1440p",
+    "title": "Terminal · GitHub dark",
+    "generator": "terminal",
+    "presetId": "github-dark",
+    "params": {},
+    "device": "1440p",
+    "width": 2560,
+    "height": 1440,
+    "tags": [
+      "terminal",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/terminal-github-dark-1440p-preview.webp",
+    "downloadUrl": "/gallery/terminal-github-dark-1440p.png",
+    "hasTextFree": false,
+    "createdAt": "2026-11-06T20:26:21.691Z",
+    "source": "samples"
+  },
+  {
+    "id": "terminal-dracula-iphone",
+    "title": "Terminal · Dracula",
+    "generator": "terminal",
+    "presetId": "dracula",
+    "params": {},
+    "device": "iphone",
+    "width": 1290,
+    "height": 2796,
+    "tags": [
+      "terminal",
+      "phone",
+      "sample"
+    ],
+    "previewUrl": "/gallery/terminal-dracula-iphone-preview.webp",
+    "downloadUrl": "/gallery/terminal-dracula-iphone.png",
+    "hasTextFree": false,
+    "createdAt": "2026-11-06T20:26:21.943Z",
+    "source": "samples"
+  },
+  {
+    "id": "terminal-phosphor-macbook14",
+    "title": "Terminal · Green phosphor",
+    "generator": "terminal",
+    "presetId": "phosphor",
+    "params": {},
+    "device": "macbook14",
+    "width": 3024,
+    "height": 1964,
+    "tags": [
+      "terminal",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/terminal-phosphor-macbook14-preview.webp",
+    "downloadUrl": "/gallery/terminal-phosphor-macbook14.png",
+    "hasTextFree": false,
+    "createdAt": "2026-11-06T20:26:22.236Z",
+    "source": "samples"
+  },
+  {
+    "id": "pixel-dither-synth-sunset-1440p-notext",
+    "title": "Pixel Dither · Synth sunset",
+    "generator": "pixel-dither",
+    "presetId": "synth-sunset",
+    "params": {},
+    "device": "1440p",
+    "width": 2560,
+    "height": 1440,
+    "tags": [
+      "pixel-dither",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/pixel-dither-synth-sunset-1440p-notext-preview.webp",
+    "downloadUrl": "/gallery/pixel-dither-synth-sunset-1440p-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-06T20:26:22.415Z",
+    "source": "samples"
+  },
+  {
+    "id": "pixel-dither-gameboy-iphone",
+    "title": "Pixel Dither · Handheld green",
+    "generator": "pixel-dither",
+    "presetId": "gameboy",
+    "params": {},
+    "device": "iphone",
+    "width": 1290,
+    "height": 2796,
+    "tags": [
+      "pixel-dither",
+      "phone",
+      "sample"
+    ],
+    "previewUrl": "/gallery/pixel-dither-gameboy-iphone-preview.webp",
+    "downloadUrl": "/gallery/pixel-dither-gameboy-iphone.png",
+    "hasTextFree": false,
+    "createdAt": "2026-11-06T20:26:22.585Z",
+    "source": "samples"
+  },
+  {
+    "id": "pixel-dither-ice-macbook14-notext",
+    "title": "Pixel Dither · Ice (3 colours)",
+    "generator": "pixel-dither",
+    "presetId": "ice",
+    "params": {},
+    "device": "macbook14",
+    "width": 3024,
+    "height": 1964,
+    "tags": [
+      "pixel-dither",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/pixel-dither-ice-macbook14-notext-preview.webp",
+    "downloadUrl": "/gallery/pixel-dither-ice-macbook14-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-06T20:26:22.874Z",
+    "source": "samples"
+  },
+  {
+    "id": "geometric-bauhaus-1440p-notext",
+    "title": "Geometric · Bauhaus",
+    "generator": "geometric",
+    "presetId": "bauhaus",
+    "params": {},
+    "device": "1440p",
+    "width": 2560,
+    "height": 1440,
+    "tags": [
+      "geometric",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/geometric-bauhaus-1440p-notext-preview.webp",
+    "downloadUrl": "/gallery/geometric-bauhaus-1440p-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-06T20:26:23.083Z",
+    "source": "samples"
+  },
+  {
+    "id": "geometric-ocean-circles-iphone-notext",
+    "title": "Geometric · Ocean circles",
+    "generator": "geometric",
+    "presetId": "ocean-circles",
+    "params": {},
+    "device": "iphone",
+    "width": 1290,
+    "height": 2796,
+    "tags": [
+      "geometric",
+      "phone",
+      "sample"
+    ],
+    "previewUrl": "/gallery/geometric-ocean-circles-iphone-notext-preview.webp",
+    "downloadUrl": "/gallery/geometric-ocean-circles-iphone-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-06T20:26:23.298Z",
+    "source": "samples"
+  },
+  {
+    "id": "geometric-candy-triangles-macbook14-notext",
+    "title": "Geometric · Candy triangles",
+    "generator": "geometric",
+    "presetId": "candy-triangles",
+    "params": {},
+    "device": "macbook14",
+    "width": 3024,
+    "height": 1964,
+    "tags": [
+      "geometric",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/geometric-candy-triangles-macbook14-notext-preview.webp",
+    "downloadUrl": "/gallery/geometric-candy-triangles-macbook14-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-06T20:26:23.598Z",
+    "source": "samples"
+  },
+  {
+    "id": "aurora-borealis-1440p-notext",
+    "title": "Aurora · Borealis",
+    "generator": "aurora",
+    "presetId": "borealis",
+    "params": {},
+    "device": "1440p",
+    "width": 2560,
+    "height": 1440,
+    "tags": [
+      "aurora",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/aurora-borealis-1440p-notext-preview.webp",
+    "downloadUrl": "/gallery/aurora-borealis-1440p-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-06T20:26:25.154Z",
+    "source": "samples"
+  },
+  {
+    "id": "aurora-solar-wind-iphone-notext",
+    "title": "Aurora · Solar wind",
+    "generator": "aurora",
+    "presetId": "solar-wind",
+    "params": {},
+    "device": "iphone",
+    "width": 1290,
+    "height": 2796,
+    "tags": [
+      "aurora",
+      "phone",
+      "sample"
+    ],
+    "previewUrl": "/gallery/aurora-solar-wind-iphone-notext-preview.webp",
+    "downloadUrl": "/gallery/aurora-solar-wind-iphone-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-06T20:26:26.847Z",
+    "source": "samples"
+  },
+  {
+    "id": "aurora-glacier-macbook14-notext",
+    "title": "Aurora · Glacier",
+    "generator": "aurora",
+    "presetId": "glacier",
+    "params": {},
+    "device": "macbook14",
+    "width": 3024,
+    "height": 1964,
+    "tags": [
+      "aurora",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/aurora-glacier-macbook14-notext-preview.webp",
+    "downloadUrl": "/gallery/aurora-glacier-macbook14-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-06T20:26:28.688Z",
+    "source": "samples"
+  },
+  {
+    "id": "minimal-type-paper-1440p",
+    "title": "Minimal Type · Paper",
+    "generator": "minimal-type",
+    "presetId": "paper",
+    "params": {},
+    "device": "1440p",
+    "width": 2560,
+    "height": 1440,
+    "tags": [
+      "minimal-type",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/minimal-type-paper-1440p-preview.webp",
+    "downloadUrl": "/gallery/minimal-type-paper-1440p.png",
+    "hasTextFree": false,
+    "createdAt": "2026-11-06T20:26:28.831Z",
+    "source": "samples"
+  },
+  {
+    "id": "minimal-type-ink-iphone",
+    "title": "Minimal Type · Ink",
+    "generator": "minimal-type",
+    "presetId": "ink",
+    "params": {},
+    "device": "iphone",
+    "width": 1290,
+    "height": 2796,
+    "tags": [
+      "minimal-type",
+      "phone",
+      "sample"
+    ],
+    "previewUrl": "/gallery/minimal-type-ink-iphone-preview.webp",
+    "downloadUrl": "/gallery/minimal-type-ink-iphone.png",
+    "hasTextFree": false,
+    "createdAt": "2026-11-06T20:26:28.966Z",
+    "source": "samples"
+  },
+  {
+    "id": "minimal-type-dusk-gradient-macbook14",
+    "title": "Minimal Type · Dusk gradient",
+    "generator": "minimal-type",
+    "presetId": "dusk-gradient",
+    "params": {},
+    "device": "macbook14",
+    "width": 3024,
+    "height": 1964,
+    "tags": [
+      "minimal-type",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/minimal-type-dusk-gradient-macbook14-preview.webp",
+    "downloadUrl": "/gallery/minimal-type-dusk-gradient-macbook14.png",
+    "hasTextFree": false,
+    "createdAt": "2026-11-06T20:26:30.414Z",
+    "source": "samples"
+  }
+]
