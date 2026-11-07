@@ -49,9 +49,14 @@ export function WallpaperStage({ gen, preset, params, name, sharePath, title, su
     return () => clearTimeout(t);
   }, [toast]);
 
-  const input = useMemo(() => ({ params, ...size }), [params, size]);
+  // Generator and params must change together: rendering one generator with another's
+  // params (e.g. mid-debounce after switching looks) crashes.
+  const input = useMemo(() => ({ gen, params, ...size }), [gen, params, size]);
   const debounced = useDebounced(input, 60);
-  const svg = useMemo(() => (g ? scopeSvgIds(renderWallpaper(g, debounced.params, { w: debounced.w, h: debounced.h }), "ws") : ""), [g, debounced]);
+  const svg = useMemo(() => {
+    const dg = getGenerator(debounced.gen);
+    return dg ? scopeSvgIds(renderWallpaper(dg, debounced.params, { w: debounced.w, h: debounced.h }), "ws") : "";
+  }, [debounced]);
 
   const fullSvg = () => (g ? renderWallpaper(g, params, { w: size.w, h: size.h }) : "");
   const file = (ext: string) => `${name}-${size.w}x${size.h}.${ext}`;

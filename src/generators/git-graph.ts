@@ -110,7 +110,7 @@ export const gitGraph: Generator<P> = {
     const u = unit(size);
     const horizontal = p.direction === "horizontal" || (p.direction === "auto" && size.w >= size.h);
     const maxLanes = Math.round(p.lanes);
-    const real = parseHistory(p.history).slice(-Math.round(p.commits));
+    const real = parseHistory(p.history ?? "").slice(-Math.round(p.commits));
     const commits = real.length >= 2 ? real.length : Math.round(p.commits);
     const colors = [p.c1, p.c2, p.c3, p.c4];
 
@@ -199,7 +199,7 @@ export const gitGraph: Generator<P> = {
     }
 
     // Repo names at the start of each real lane.
-    const names = p.repos.split("|").map((s) => s.trim());
+    const names = (p.repos ?? "").split("|").map((s) => s.trim());
     if (real.length >= 2 && p.labels) {
       const firstT = new Map<number, number>();
       for (const d of dots) if (!firstT.has(d.lane)) firstT.set(d.lane, d.t);
