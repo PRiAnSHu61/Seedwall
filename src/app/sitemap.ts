@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/"), lastModified: now, changeFrequency: "weekly", priority: 1 },
     { url: absoluteUrl("/studio"), lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/gallery"), lastModified: now, changeFrequency: "daily", priority: 0.9 },
+    { url: absoluteUrl("/mac"), lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     ...GENERATORS.map((g) => ({
       url: absoluteUrl(`/generators/${g.id}`),
       lastModified: now,

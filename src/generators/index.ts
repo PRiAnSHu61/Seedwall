@@ -18,6 +18,7 @@ import { halftone } from "./halftone";
 import { spirograph } from "./spirograph";
 import { codeCity } from "./code-city";
 import { marble } from "./marble";
+import { contributions } from "./contributions";
 
 /** Erase a generator's param type for storage in the registry. */
 const reg = <P extends Params>(g: Generator<P>): AnyGenerator => g as unknown as AnyGenerator;
@@ -38,6 +39,7 @@ export const GENERATORS: readonly AnyGenerator[] = [
   reg(landscape),
   reg(truchet),
   reg(gitGraph),
+  reg(contributions),
   reg(circuit),
   reg(halftone),
   reg(spirograph),

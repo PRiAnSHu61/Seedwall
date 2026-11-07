@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`seed links > keeps published seeds stable 1`] = `
+[
+  "truchet/paper-arcs/github-light/notext",
+  "mesh-gradient/lagoon/gruvbox/notext",
+  "code-city/tokyo/nord/notext",
+  "geometric/ocean-circles/-/notext",
+  "terminal/github-dark/-/notext",
+]
+`;

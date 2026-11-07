@@ -13,6 +13,7 @@ interface Props {
 export function ParamsPanel({ gen, params, onChange }: Props) {
   const groups = new Map<string, [string, ParamDef][]>();
   for (const [key, def] of Object.entries(gen.params)) {
+    if (def.hidden) continue;
     const g = def.group ?? "General";
     groups.set(g, [...(groups.get(g) ?? []), [key, def]]);
   }
