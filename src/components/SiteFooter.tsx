@@ -84,6 +84,8 @@ export function SiteFooter() {
           <span className="label">Explore</span>
           <Link href="/studio">Studio</Link>
           <Link href="/gallery">Gallery</Link>
+          <Link href="/today">Today&apos;s seed</Link>
+          <Link href="/mac">Mac app</Link>
           <Link href="/#generators">All generators</Link>
           {SITE.driveUrl ? (
             <a href={SITE.driveUrl} target="_blank" rel="noreferrer">Full pack on Drive ↗</a>

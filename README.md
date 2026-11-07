@@ -5,6 +5,9 @@ Browse, customise and generate desktop and phone wallpapers — **https://seedwa
 - **/studio**: pick a generator and preset, then change colours, text (or go text-free), device and seed. Download a full-size PNG or SVG, copy a share link, or save to your collection.
 - **/gallery**: the Cutting Mat pack, read live from the shared Google Drive folder (refreshed hourly, with direct downloads), plus generated samples. Filter by generator, device, tag and text-free.
 - **/generators/[id]**: one page per look, showing its presets and parameter table.
+- **/s/[seed]**: seed links. Every number from 1 to 999999 is one exact wallpaper, the same for everyone. **/today** redirects to today's seed.
+- **/u/[github-username]**: a wallpaper drawn from someone's real public GitHub contribution graph and recent commits.
+- **/mac**: the menu-bar app (`mac/`) that sets a new wallpaper every day.
 
 Every wallpaper is an **SVG string produced by a pure TypeScript function**. The same code runs in the browser (live preview, PNG export via canvas) and in Node (CLI, PNG via resvg). Output is deterministic from `(generator, params, size, seed)`.
 
@@ -36,6 +39,37 @@ public/gallery        generated samples + manifest.json
 **Text** is a shared layer on every generator: `text.line1`, `text.line2`, `text.paragraph`, `text.position`, `text.font`, `text.size`, `text.color` and the `text.none` toggle. Wrap words in `*stars*` to set them in italics. `layoutText()` measures text with `shared/fontMetrics.ts`, an advance-width table generated from the real TTFs by `npm run fonts:metrics`. Browser, CLI and tests therefore measure the same way, so placement is identical everywhere. The layout returns **clear zones**, and generators mask their grid or shapes out of those zones so nothing runs through the quote.
 
 **Units:** generators lay out in `u = min(w, h) / 100`, so portrait and landscape both work.
+
+## Seeds, GitHub wallpapers and the image API
+
+**Seed links.** `src/lib/seed.ts` turns a number into a generator, preset, optional editor theme and text on/off, then uses the number as the generator's seed. The pools it picks from are **frozen literals**, so adding generators, presets or themes never changes what an existing `/s/<seed>` shows. A snapshot test (`tests/seeds.test.ts`) fails if it does. To add new looks to seeds, add a `POOL_V2` for a new seed range; don't edit V1. `dailySeed(date)` hashes the date, so everyone gets the same seed on the same day.
+
+**GitHub wallpapers.** `src/lib/server/github.ts` fetches a user's contribution calendar and recent commits, and Next's fetch cache keeps them for 6 hours.
+
+- With `GITHUB_TOKEN` set (a fine-grained token with no permissions is enough, since only public data is read), it's one GraphQL query from a 5,000/hour budget. **Set it in production.**
+- Without a token it reads `github.com/users/<login>/contributions` plus a few REST calls. Those share the anonymous 60/hour limit, which is fine for development.
+
+The data goes into hidden params (`data`/`start` on **Contribution Grid**, `history`/`repos` on **Git Graph**), so rendering stays pure and deterministic. Hidden params aren't shown in the studio. `src/lib/personal.ts` defines the six looks.
+
+**Image API** (PNG by default; `&format=svg`):
+
+| Endpoint | What |
+| --- | --- |
+| `/api/s/<seed>?w=&h=` or `?d=<device>` | one seed, cached forever; `&format=json` describes it |
+| `/api/daily?d=…[&date=YYYY-MM-DD]` | today's seed (UTC, or the given date); `&format=json` → `{ date, seed, page, image }` |
+| `/api/u/<login>?look=…&theme=…&d=…` | a GitHub wallpaper |
+
+Sizes are capped at 6144 px per side (larger requests are scaled down). Fonts are traced into the functions through `outputFileTracingIncludes` in `next.config.ts`.
+
+## Mac app (`mac/`)
+
+A SwiftUI `MenuBarExtra` (macOS 13+). Once a day at local midnight, and also after wake and when displays change, it fetches the right image for each screen at native resolution and sets it with `NSWorkspace.setDesktopImageURL`. Its modes are today's seed, random, a pinned seed, or the user's GitHub look plus a theme. It also offers open at login (`SMAppService`).
+
+```bash
+cd mac && ./build.sh                 # → mac/build/Seedwall.app (ad-hoc signed; needs Xcode installed)
+SIGN_ID="Developer ID Application: …" ./build.sh   # for distribution, then notarise
+defaults write work.suryansh.seedwallbar baseURL http://localhost:3000   # point it at a dev server
+```
 
 ## Add a new generator (worked example)
 

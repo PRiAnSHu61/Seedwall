@@ -14,6 +14,8 @@ type P = TextParams & {
   commits: number;
   labels: boolean;
   direction: string;
+  history: string;
+  repos: string;
   seed: number;
 };
 
@@ -38,6 +40,8 @@ const params: ParamSchema<P> = {
       { value: "vertical", label: "Top → bottom" },
     ],
   },
+  history: { kind: "text", label: "Real commits", default: "", maxLength: 6000, hidden: true, help: "One per line, oldest first: lane<TAB>sha<TAB>message" },
+  repos: { kind: "text", label: "Lane names", default: "", maxLength: 400, hidden: true, help: "Repo name per lane, separated by |" },
   seed: { kind: "seed", label: "Seed", default: 42 },
   ...textParams({ "text.line1": "git commit -m", "text.line2": "\"*ship it*\"", "text.font": "mono", "text.size": 4, "text.color": "#e6edf3", "text.position": "top-right" }),
 };
@@ -53,6 +57,48 @@ const presets: Preset<P>[] = [
 const MESSAGES = ["fix: off-by-one in pager", "feat: add dark mode", "refactor: extract hook", "chore: bump deps", "perf: memoise layout", "docs: update README", "test: cover edge case", "feat: share links", "fix: race in cache", "style: tidy imports", "feat: export PNG", "revert: flaky change", "ci: cache node_modules", "feat: seeded rng"];
 
 interface Seg { lane: number; from: number; to: number; fromLane?: number; toLane?: number }
+interface Dot { lane: number; t: number; merge: boolean; sha?: string; msg?: string }
+
+export interface RealCommit { lane: number; sha: string; msg: string }
+
+/** Parses the hidden `history` param: one commit per line, "lane\tsha\tmessage", oldest first. */
+export function parseHistory(history: string): RealCommit[] {
+  const out: RealCommit[] = [];
+  for (const line of history.split("\n")) {
+    const [lane, sha, ...msg] = line.split("\t");
+    const l = Number(lane);
+    if (!Number.isInteger(l) || l < 0 || !sha || !/^[0-9a-f]{4,40}$/i.test(sha)) continue;
+    out.push({ lane: l, sha: sha.slice(0, 7).toLowerCase(), msg: msg.join(" ").trim() });
+  }
+  return out;
+}
+
+/** Inverse of parseHistory — what the server writes into the param. */
+export function formatHistory(commits: readonly RealCommit[]): string {
+  return commits.map((c) => `${c.lane}\t${c.sha.slice(0, 7)}\t${c.msg.replace(/[\t\n\r]+/g, " ").slice(0, 72)}`).join("\n");
+}
+
+/** Real history: lane 0 is the trunk; every other repo forks off it and merges back. */
+function realLayout(list: readonly RealCommit[], maxLanes: number): { segs: Seg[]; dots: Dot[] } {
+  const segs: Seg[] = [];
+  const dots: Dot[] = [];
+  const last = list.length - 1;
+  const span = new Map<number, [number, number]>();
+  list.forEach((c, t) => {
+    const lane = Math.min(c.lane, maxLanes - 1);
+    const s = span.get(lane);
+    span.set(lane, s ? [s[0], t] : [t, t]);
+    dots.push({ lane, t, merge: false, sha: c.sha, msg: c.msg });
+  });
+  segs.push({ lane: 0, from: 0, to: last });
+  for (const [lane, [a, b]] of span) {
+    if (lane === 0) continue;
+    if (a > 0) segs.push({ lane, from: a - 1, to: a, fromLane: 0 });
+    segs.push({ lane, from: a, to: b });
+    if (b < last) segs.push({ lane, from: b, to: b + 1, toLane: 0 });
+  }
+  return { segs, dots };
+}
 
 export const gitGraph: Generator<P> = {
   id: "git-graph",
@@ -64,15 +110,22 @@ export const gitGraph: Generator<P> = {
     const u = unit(size);
     const horizontal = p.direction === "horizontal" || (p.direction === "auto" && size.w >= size.h);
     const maxLanes = Math.round(p.lanes);
-    const commits = Math.round(p.commits);
+    const real = parseHistory(p.history).slice(-Math.round(p.commits));
+    const commits = real.length >= 2 ? real.length : Math.round(p.commits);
     const colors = [p.c1, p.c2, p.c3, p.c4];
 
     // Simulate history: lane 0 is main and never ends.
     const active = new Set<number>([0]);
     const start = new Map<number, number>([[0, 0]]);
     const segs: Seg[] = [];
-    const dots: { lane: number; t: number; merge: boolean }[] = [];
-    for (let t = 0; t < commits; t++) {
+    const dots: Dot[] = [];
+    if (real.length >= 2) {
+      const r = realLayout(real, maxLanes);
+      segs.push(...r.segs);
+      dots.push(...r.dots);
+      active.clear();
+    }
+    for (let t = 0; t < (real.length >= 2 ? 0 : commits); t++) {
       const lanes = [...active];
       const r = rng();
       if (r < 0.22 && active.size < maxLanes) {
@@ -119,7 +172,8 @@ export const gitGraph: Generator<P> = {
       })
       .join("");
 
-    const r = Math.min(1.5 * u, laneGap * 0.3);
+    // Real histories can be dense: keep dots from overlapping (synthetic output is unchanged).
+    const r = Math.min(1.5 * u, laneGap * 0.3, real.length >= 2 ? step * 0.4 : Infinity);
     const fs = 1.25 * u;
     const dotSvg: string[] = [];
     const labels: string[] = [];
@@ -128,14 +182,36 @@ export const gitGraph: Generator<P> = {
       const [x, y] = pos(d.t, d.lane);
       dotSvg.push(`<circle cx="${n(x)}" cy="${n(y)}" r="${n(d.merge ? r * 1.25 : r)}" fill="${d.merge ? esc(p.bg) : col(d.lane)}" stroke="${col(d.lane)}"/>`);
       if (p.labels) {
-        const hash = Array.from({ length: 7 }, () => hex[Math.floor(rng() * 16)]).join("");
-        const msg = pick(rng, MESSAGES);
+        const hash = d.sha ?? Array.from({ length: 7 }, () => hex[Math.floor(rng() * 16)]).join("");
+        const msg = d.msg ?? pick(rng, MESSAGES);
         if (horizontal) {
-          if (d.t % 2 === 0) labels.push(`<text transform="translate(${n(x)} ${n(laneBase + 3.2 * u)}) rotate(50)">${hash}</text>`);
+          const every = d.sha ? Math.max(1, Math.round(commits / 40)) : 2;
+          const tail = d.sha ? ` ${esc(msg.length > 20 ? `${msg.slice(0, 19)}…` : msg)}` : "";
+          if (d.t % every === 0) labels.push(`<text transform="translate(${n(x)} ${n(laneBase + 3.2 * u)}) rotate(50)">${hash}${tail}</text>`);
         } else {
           const lx = laneBase + (used - 1) * laneGap + 4 * u;
-          labels.push(`<text x="${n(lx)}" y="${n(y + fs * 0.35)}"><tspan fill="${col(d.lane)}">${hash}</tspan> ${esc(msg)}</text>`);
+          // Real messages can be long: cut them to the space left on the line.
+          const room = Math.floor((size.w - lx - 3 * u) / (fs * 0.6)) - 8;
+          const shown = d.sha && msg.length > room ? `${msg.slice(0, Math.max(0, room - 1))}…` : msg;
+          labels.push(`<text x="${n(lx)}" y="${n(y + fs * 0.35)}"><tspan fill="${col(d.lane)}">${hash}</tspan> ${esc(shown)}</text>`);
         }
+      }
+    }
+
+    // Repo names at the start of each real lane.
+    const names = p.repos.split("|").map((s) => s.trim());
+    if (real.length >= 2 && p.labels) {
+      const firstT = new Map<number, number>();
+      for (const d of dots) if (!firstT.has(d.lane)) firstT.set(d.lane, d.t);
+      for (const [lane, t] of firstT) {
+        const name = names[lane];
+        if (!name) continue;
+        const [x, y] = pos(t, lane);
+        labels.push(
+          horizontal
+            ? `<text x="${n(x)}" y="${n(y - r - 1.4 * u)}" fill="${col(lane)}" font-size="${n(fs * 1.15)}">${esc(name)}</text>`
+            : `<text transform="translate(${n(x - r - 1.2 * u)} ${n(y)}) rotate(-90)" text-anchor="end" fill="${col(lane)}" font-size="${n(fs * 1.15)}">${esc(name)}</text>`,
+        );
       }
     }
 

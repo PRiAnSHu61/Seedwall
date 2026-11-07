@@ -112,7 +112,7 @@ export default async function GeneratorPage({ params }: { params: Promise<{ id: 
               <tr><th>Key</th><th>Label</th><th>Values</th><th>Default</th></tr>
             </thead>
             <tbody>
-              {Object.entries(gen.params).map(([key, def]) => (
+              {Object.entries(gen.params).filter(([, def]) => !def.hidden).map(([key, def]) => (
                 <tr key={key}>
                   <td><code>{key}</code></td>
                   <td>{def.label}</td>

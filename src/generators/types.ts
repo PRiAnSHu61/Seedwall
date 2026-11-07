@@ -7,6 +7,8 @@ interface BaseDef {
   /** Optional UI group heading ("Colours", "Grid", "Text"…). */
   group?: string;
   help?: string;
+  /** Data fed in by code (e.g. real GitHub history) — not shown as a studio control. */
+  hidden?: boolean;
 }
 
 /** What a colour is for — lets a syntax theme recolour any generator. */
