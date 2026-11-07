@@ -3,8 +3,17 @@ import { DEVICES } from "@/config/devices";
 import { SITE } from "@/config/site";
 import { GENERATORS } from "@/generators";
 import { Logo } from "./Logo";
+import { ReportLink } from "./ReportLink";
+import { REPO_URL } from "@/config/seo";
 
-const AUTHOR = { name: "Suryansh Chaudhary", url: "https://suryansh.work/" } as const;
+const AUTHOR = { name: "Suryansh Chaudhary", url: "https://suryansh.work/", email: "suryansh.codes2001@gmail.com" } as const;
+
+/**
+ * A short, hand-picked list keeps the footer the same height however many
+ * generators exist. The rest are one click away.
+ */
+const FOOTER_GENERATORS = ["contributions", "cutting-mat", "git-graph", "flow-field", "aurora", "terminal"];
+const NEW_GENERATORS = new Set(["contributions"]);
 
 /** Same profiles as suryansh.work. Paths are the brands' own simple glyphs (24×24). */
 const SOCIALS = [
@@ -86,7 +95,7 @@ export function SiteFooter() {
           <Link href="/gallery">Gallery</Link>
           <Link href="/today">Today&apos;s seed</Link>
           <Link href="/mac">Mac app</Link>
-          <Link href="/#generators">All generators</Link>
+          <Link href="/#personal-h">Your GitHub wallpaper</Link>
           {SITE.driveUrl ? (
             <a href={SITE.driveUrl} target="_blank" rel="noreferrer">Full pack on Drive ↗</a>
           ) : (
@@ -96,9 +105,15 @@ export function SiteFooter() {
 
         <nav className="footer-col" aria-label="Generators">
           <span className="label">Generators</span>
-          {GENERATORS.map((g) => (
-            <Link key={g.id} href={`/generators/${g.id}`}>{g.name}</Link>
-          ))}
+          {FOOTER_GENERATORS.map((id) => GENERATORS.find((g) => g.id === id))
+            .filter((g) => g !== undefined)
+            .map((g) => (
+              <Link key={g.id} href={`/generators/${g.id}`}>
+                {g.name}
+                {NEW_GENERATORS.has(g.id) && <span className="new-tag">New</span>}
+              </Link>
+            ))}
+          <Link href="/#generators" className="more-link">All {GENERATORS.length} generators →</Link>
         </nav>
 
         <div className="footer-col">
@@ -108,6 +123,14 @@ export function SiteFooter() {
           <Link href="/studio?g=aurora&p=borealis&d=4k">4K aurora</Link>
           <Link href="/studio?g=terminal&p=github-dark&d=ultrawide">Ultrawide terminal</Link>
           <Link href="/studio?g=minimal-type&p=paper">Just a quote</Link>
+        </div>
+
+        <div className="footer-col">
+          <span className="label">Get in touch</span>
+          <a href={`mailto:${AUTHOR.email}`} className="footer-email">{AUTHOR.email.split("@")[0]}<wbr />@{AUTHOR.email.split("@")[1]}</a>
+          <ReportLink>Report a bug</ReportLink>
+          <a href={`${REPO_URL}/issues/new`} target="_blank" rel="noreferrer">Open a GitHub issue ↗</a>
+          <a href={`mailto:${AUTHOR.email}?subject=${encodeURIComponent("Seedwall idea")}`}>Suggest a generator</a>
         </div>
       </div>
 

@@ -128,7 +128,7 @@ export const contributions: Generator<P> = {
   presets,
   render(p, size, rng) {
     const u = unit(size);
-    const real = parseLevels(p.data);
+    const real = parseLevels(p.data ?? "");
     const levels = real.length >= 7 ? real : syntheticLevels(rng);
     const weeks = Math.ceil(levels.length / 7);
     const empty = mix(p.bg, p.fg, 0.16);
@@ -138,7 +138,7 @@ export const contributions: Generator<P> = {
       return mix(p.bg, top, [0, 0.3, 0.52, 0.76, 1][level] ?? 1);
     };
 
-    const start = /^\d{4}-\d{2}-\d{2}$/.test(p.start) ? Date.parse(`${p.start}T00:00:00Z`) : Number.NaN;
+    const start = /^\d{4}-\d{2}-\d{2}$/.test(p.start ?? "") ? Date.parse(`${p.start}T00:00:00Z`) : Number.NaN;
     const showLabels = p.labels && p.style !== "skyline";
     const showMonths = showLabels && Number.isFinite(start);
     const labelRoom = showLabels ? 2.2 : 0;

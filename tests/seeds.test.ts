@@ -132,6 +132,16 @@ describe("real GitHub data", () => {
     expect(other).toBe(svg); // the seed never moves real commits
   });
 
+  it("tolerates params without the hidden data keys (switching looks mid-render)", () => {
+    for (const id of ["git-graph", "contributions"]) {
+      const gen = getGenerator(id)!;
+      const p = { ...resolveParams(gen, gen.presets[0]?.id) };
+      for (const k of ["history", "repos", "data", "start"]) delete p[k];
+      const svg = renderWallpaper(gen, p, { w: 1600, h: 1000 });
+      expect(XMLValidator.validate(svg), id).toBe(true);
+    }
+  });
+
   it("the synthetic grid still varies by seed", () => {
     const gen = getGenerator("contributions")!;
     const a = renderWallpaper(gen, resolveParams(gen, "github-dark", { seed: 1 }), { w: 1600, h: 1000 });

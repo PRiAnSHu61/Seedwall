@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GitHubForm } from "@/components/GitHubForm";
 import { PersonalView } from "@/components/PersonalView";
+import { ReportLink } from "@/components/ReportLink";
 import { pageMetadata } from "@/config/seo";
 import { GitHubError, getGitHubProfile, isValidLogin } from "@/lib/server/github";
 import type { PersonalData } from "@/lib/personal";
@@ -46,7 +47,10 @@ export default async function UserPage({ params, searchParams }: Props) {
             : "We hit GitHub's rate limit or it didn't answer. Give it a few minutes, then reload."}
         </p>
         <GitHubForm initial={problem === "not-found" ? "" : login} cta={problem === "not-found" ? "Try again" : "Retry"} />
-        <p className="hero-actions"><Link className="btn" href="/today">Or see today&apos;s seed</Link></p>
+        <p className="hero-actions">
+          <Link className="btn" href="/today">Or see today&apos;s seed</Link>
+          {problem !== "not-found" && <ReportLink className="btn" error={`GitHub ${problem} for @${login}`}>Still broken? Tell Suryansh</ReportLink>}
+        </p>
       </div>
     );
 
