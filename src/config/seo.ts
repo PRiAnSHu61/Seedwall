@@ -9,6 +9,7 @@ export const AUTHOR = {
   xHandle: "@Suryansh_2001",
   linkedin: "https://www.linkedin.com/in/suryansh-chaudhary-2209/",
   github: "https://github.com/Suryansh-Codes2209",
+  email: "suryansh.codes2001@gmail.com",
 } as const;
 
 export const REPO_URL = "https://github.com/Suryansh-Codes2209/Seedwall";
