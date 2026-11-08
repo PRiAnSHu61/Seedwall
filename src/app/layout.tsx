@@ -86,6 +86,10 @@ export const viewport: Viewport = {
   ],
 };
 
+/** Google Tag Manager container. */
+const GTM_ID = "GTM-WZ63MQTH";
+const gtmScript = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`;
+
 /** Applies the saved theme before paint so there's no flash. */
 const themeScript = `try{var t=localStorage.getItem("ws.theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
 
@@ -95,8 +99,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <JsonLd data={STRUCTURED_DATA} />
+        <script dangerouslySetInnerHTML={{ __html: gtmScript }} />
       </head>
       <body>
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
         <a href="#main" className="visually-hidden">Skip to content</a>
         <SiteHeader />
         <main id="main">{children}</main>
