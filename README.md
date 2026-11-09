@@ -198,3 +198,11 @@ To add wallpapers, drop PNGs into the Drive sub-folders. They appear on the site
 4. Redeploy. Pages are static, and the gallery and home re-fetch the Drive listing at most once an hour (ISR).
 
 Or from the CLI: `npx vercel link && npx vercel --prod`, then `npx vercel domains add seedwall.suryansh.work`.
+
+## Contributing
+
+New looks are welcome. Each one is a single file in `src/generators/`. Start from [`_template.ts`](src/generators/_template.ts) and follow [CONTRIBUTING.md](CONTRIBUTING.md). Have an idea but don't want to code it? [Open a design idea](../../issues/new?template=design-idea.yml).
+
+## License
+
+[MIT](LICENSE). The bundled fonts are under the SIL Open Font License; see [`public/fonts/LICENSE.md`](public/fonts/LICENSE.md).
