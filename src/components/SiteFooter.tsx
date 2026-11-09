@@ -15,6 +15,8 @@ const AUTHOR = { name: "Suryansh Chaudhary", url: "https://suryansh.work/", emai
 const FOOTER_GENERATORS = ["contributions", "cutting-mat", "git-graph", "flow-field", "aurora", "terminal"];
 const NEW_GENERATORS = new Set(["contributions"]);
 
+const GITHUB_ICON = "M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2.1c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.09-.73.09-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .32.21.7.82.58A12 12 0 0 0 12 .3Z";
+
 /** Same profiles as suryansh.work. Paths are the brands' own simple glyphs (24×24). */
 const SOCIALS = [
   {
@@ -33,7 +35,7 @@ const SOCIALS = [
     label: "GitHub",
     handle: "Suryansh-Codes2209",
     href: "https://github.com/Suryansh-Codes2209",
-    d: "M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2.1c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.09-.73.09-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .32.21.7.82.58A12 12 0 0 0 12 .3Z",
+    d: GITHUB_ICON,
   },
 ] as const;
 
@@ -87,6 +89,12 @@ export function SiteFooter() {
             <div><dt>Devices</dt><dd>{DEVICES.length}+</dd></div>
             <div><dt>Seeds</dt><dd>10⁶</dd></div>
           </dl>
+          <a href={`${REPO_URL}/blob/main/CONTRIBUTING.md`} target="_blank" rel="noreferrer" className="footer-contribute">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+              <path d={GITHUB_ICON} fill="currentColor" />
+            </svg>
+            <span>Open source · <strong>Contribute a generator</strong> ↗</span>
+          </a>
         </div>
 
         <nav className="footer-col" aria-label="Explore">
@@ -130,7 +138,8 @@ export function SiteFooter() {
           <a href={`mailto:${AUTHOR.email}`} className="footer-email">{AUTHOR.email.split("@")[0]}<wbr />@{AUTHOR.email.split("@")[1]}</a>
           <ReportLink>Report a bug</ReportLink>
           <a href={`${REPO_URL}/issues/new`} target="_blank" rel="noreferrer">Open a GitHub issue ↗</a>
-          <a href={`mailto:${AUTHOR.email}?subject=${encodeURIComponent("Seedwall idea")}`}>Suggest a generator</a>
+          <a href={`${REPO_URL}/issues/new?template=design-idea.yml`} target="_blank" rel="noreferrer">Suggest a generator ↗</a>
+          <a href={REPO_URL} target="_blank" rel="noreferrer">Source on GitHub ↗</a>
         </div>
       </div>
 
