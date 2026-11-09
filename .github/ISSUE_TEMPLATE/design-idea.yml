@@ -1,0 +1,27 @@
+name: Design idea
+description: Suggest a new wallpaper look. No code needed.
+labels: ["design idea"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: The look
+      description: What should it look like? What makes it different from the existing generators?
+    validations:
+      required: true
+  - type: textarea
+    id: reference
+    attributes:
+      label: Sketch or reference
+      description: Drag in a sketch, a mood board or reference images. Please only share images you're allowed to share. We won't copy someone else's artwork.
+  - type: textarea
+    id: params
+    attributes:
+      label: What should be adjustable?
+      description: e.g. colours, density, line width, shape count
+  - type: checkboxes
+    id: build
+    attributes:
+      label: Building it
+      options:
+        - label: I'd like to build this myself (see CONTRIBUTING.md)
