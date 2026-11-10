@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { JsonLd } from "@/components/JsonLd";
 import { ServiceWorker } from "@/components/ServiceWorker";
-import { AUTHOR, KEYWORDS, REPO_URL, absoluteUrl } from "@/config/seo";
+import { AUTHOR, REPO_URL, absoluteUrl } from "@/config/seo";
 import { SITE } from "@/config/site";
 import { GENERATORS } from "@/generators";
 import "./globals.css";
@@ -20,7 +20,6 @@ export const metadata: Metadata = {
   title: { default: TITLE, template: `%s · ${SITE.name}` },
   description: DESCRIPTION,
   applicationName: SITE.name,
-  keywords: KEYWORDS,
   authors: [{ name: AUTHOR.name, url: AUTHOR.url }],
   creator: AUTHOR.name,
   publisher: AUTHOR.name,

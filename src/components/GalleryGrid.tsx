@@ -83,7 +83,7 @@ export function GalleryGrid({ items, generators, compact }: Props) {
           <button key={item.id} type="button" className={`gallery-item${item.height > item.width ? " portrait" : ""}`} onClick={() => setOpen(item)}>
             <div className="gi-media">
               {/* eslint-disable-next-line @next/next/no-img-element -- remote Drive thumbnails, no optimiser needed */}
-              <img src={item.previewUrl} alt="" loading="lazy" referrerPolicy="no-referrer" />
+              <img src={item.previewUrl} alt={`${item.title} ${item.height > item.width ? "phone" : "desktop"} wallpaper (${item.width}×${item.height}) preview`} loading="lazy" referrerPolicy="no-referrer" />
             </div>
             <div className="gi-body">
               <strong>{item.title}</strong>

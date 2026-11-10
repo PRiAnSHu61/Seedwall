@@ -14,25 +14,6 @@ export const AUTHOR = {
 
 export const REPO_URL = "https://github.com/Suryansh-Codes2209/Seedwall";
 
-export const KEYWORDS = [
-  "wallpaper generator",
-  "generative wallpapers",
-  "desktop wallpaper",
-  "phone wallpaper",
-  "iPhone wallpaper",
-  "MacBook wallpaper",
-  "4K wallpaper",
-  "developer wallpaper",
-  "cutting mat wallpaper",
-  "flow field",
-  "synthwave wallpaper",
-  "minimal wallpaper",
-  "SVG wallpaper",
-  "custom quote wallpaper",
-  "Dracula theme wallpaper",
-  "Tokyo Night wallpaper",
-];
-
 export const absoluteUrl = (path: string): string => new URL(path, SITE.url).toString();
 
 /** Metadata for a page: title, description, canonical URL, Open Graph and Twitter card. */
