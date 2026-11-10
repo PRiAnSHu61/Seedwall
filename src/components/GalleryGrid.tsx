@@ -37,6 +37,14 @@ export function GalleryGrid({ items, generators, compact }: Props) {
       (tag === "all" || i.tags.includes(tag)),
   );
 
+  const genName = new Map(generators.map((g) => [g.id, g.name]));
+  /** Descriptive alt: generator + title (Drive titles like "Frame 3" mean nothing alone), shape and size. */
+  const altFor = (i: GalleryItem) => {
+    const name = genName.get(i.generator);
+    const label = name && !i.title.startsWith(name) ? `${name} – ${i.title}` : i.title;
+    return `${label}: ${i.height > i.width ? "phone" : "desktop"} wallpaper, ${i.width}×${i.height}`;
+  };
+
   const chips = <T extends string>(value: T, set: (v: T) => void, options: [T, string][], label: string) => (
     <div className="field">
       <span className="label">{label}</span>
@@ -83,7 +91,7 @@ export function GalleryGrid({ items, generators, compact }: Props) {
           <button key={item.id} type="button" className={`gallery-item${item.height > item.width ? " portrait" : ""}`} onClick={() => setOpen(item)}>
             <div className="gi-media">
               {/* eslint-disable-next-line @next/next/no-img-element -- remote Drive thumbnails, no optimiser needed */}
-              <img src={item.previewUrl} alt={`${item.title} ${item.height > item.width ? "phone" : "desktop"} wallpaper (${item.width}×${item.height}) preview`} loading="lazy" referrerPolicy="no-referrer" />
+              <img src={item.previewUrl} alt={altFor(item)} loading="lazy" referrerPolicy="no-referrer" />
             </div>
             <div className="gi-body">
               <strong>{item.title}</strong>
