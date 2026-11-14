@@ -45,6 +45,32 @@ The tests enforce most of these.
 
 Helpers worth knowing: `shared/rng.ts` (`range`, `pick`), `shared/noise.ts`, `shared/palettes.ts`, `shared/color.ts`, `shared/svg.ts` (`grainFilter`, `blurFilter`, `smoothPath`) and `shared/contours.ts`.
 
+### Shared helpers, with examples
+
+Import paths are relative to a generator file in `src/generators/`.
+
+**`shared/noise.ts`** — seeded 2D gradient (Perlin-style) noise. `createNoise2D(rng)` returns `(x, y) => number`, roughly in `[-1, 1]`; `fbm()` sums octaves for smoother fields.
+
+```ts
+import { createNoise2D, fbm } from "./shared/noise";
+const h = fbm(createNoise2D(rng), x * 0.01, y * 0.01, 4); // fractal height at (x, y)
+```
+
+**`shared/color.ts`** — hex/RGB conversion and contrast-safe ink. `mix()` interpolates two hex colours; `autoInk()` picks white or near-black text for a background.
+
+```ts
+import { autoInk, mix } from "./shared/color";
+const ink = autoInk(p.bg);                  // "#ffffff" or "#1b1b1b"
+const mid = mix("#101418", "#ff7a59", 0.5); // linear mix, t in [0, 1]
+```
+
+**`shared/contours.ts`** — marching squares over a scalar grid. `contourPaths()` returns SVG path data for the region where the field is above `t`; pass `closed: true` for filled loops (use with `fill-rule="evenodd"`).
+
+```ts
+import { contourPaths } from "./shared/contours";
+const d = contourPaths(field, cols, rows, cell, 0.5, { closed: true }); // path data for field > 0.5
+```
+
 ## Things that must not change
 
 - **Seed pools in `src/lib/seed.ts`.** `/s/<seed>` links are permanent: every number must show the same wallpaper forever. Never edit `POOL_V1`. New looks reach seed links through a new pool for a new seed range, and that's a maintainer decision, so leave it out of your PR. `tests/seeds.test.ts` fails if an existing seed changes. **Don't update that snapshot to make it pass.**
