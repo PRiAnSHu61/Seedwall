@@ -9,6 +9,8 @@
 @font-face { font-family: "Schibsted Grotesk"; src: url("/fonts/SchibstedGrotesk-Italic.ttf") format("truetype"); font-style: italic; font-display: swap; }
 @font-face { font-family: "Instrument Serif"; src: url("/fonts/InstrumentSerif-Regular.ttf") format("truetype"); font-style: normal; font-display: swap; }
 @font-face { font-family: "Instrument Serif"; src: url("/fonts/InstrumentSerif-Italic.ttf") format("truetype"); font-style: italic; font-display: swap; }
+@font-face { font-family: "Tiro Devanagari Hindi"; src: url("/fonts/TiroDevanagariHindi-Regular.ttf") format("truetype"); font-style: normal; font-display: swap; }
+@font-face { font-family: "Tiro Devanagari Hindi"; src: url("/fonts/TiroDevanagariHindi-Italic.ttf") format("truetype"); font-style: italic; font-display: swap; }
 
 /* ---------- tokens ---------- */
 :root {

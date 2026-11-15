@@ -1558,5 +1558,515 @@
     "hasTextFree": true,
     "createdAt": "2026-11-11T18:25:26.853Z",
     "source": "samples"
+  },
+  {
+    "id": "kintsugi-raku-1440p-notext",
+    "title": "Kintsugi · Raku",
+    "generator": "kintsugi",
+    "presetId": "raku",
+    "params": {},
+    "device": "1440p",
+    "width": 2560,
+    "height": 1440,
+    "tags": [
+      "kintsugi",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/kintsugi-raku-1440p-notext-preview.webp",
+    "downloadUrl": "/gallery/kintsugi-raku-1440p-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T09:42:51.022Z",
+    "source": "samples"
+  },
+  {
+    "id": "kintsugi-celadon-iphone-notext",
+    "title": "Kintsugi · Celadon",
+    "generator": "kintsugi",
+    "presetId": "celadon",
+    "params": {},
+    "device": "iphone",
+    "width": 1290,
+    "height": 2796,
+    "tags": [
+      "kintsugi",
+      "phone",
+      "sample"
+    ],
+    "previewUrl": "/gallery/kintsugi-celadon-iphone-notext-preview.webp",
+    "downloadUrl": "/gallery/kintsugi-celadon-iphone-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T09:42:51.680Z",
+    "source": "samples"
+  },
+  {
+    "id": "kintsugi-porcelain-macbook14-notext",
+    "title": "Kintsugi · Porcelain",
+    "generator": "kintsugi",
+    "presetId": "porcelain",
+    "params": {},
+    "device": "macbook14",
+    "width": 3024,
+    "height": 1964,
+    "tags": [
+      "kintsugi",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/kintsugi-porcelain-macbook14-notext-preview.webp",
+    "downloadUrl": "/gallery/kintsugi-porcelain-macbook14-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T09:42:52.795Z",
+    "source": "samples"
+  },
+  {
+    "id": "ascent-night-launch-1440p-notext",
+    "title": "Ascent · Night launch",
+    "generator": "ascent",
+    "presetId": "night-launch",
+    "params": {},
+    "device": "1440p",
+    "width": 2560,
+    "height": 1440,
+    "tags": [
+      "ascent",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/ascent-night-launch-1440p-notext-preview.webp",
+    "downloadUrl": "/gallery/ascent-night-launch-1440p-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T09:42:53.117Z",
+    "source": "samples"
+  },
+  {
+    "id": "ascent-dawn-iphone-notext",
+    "title": "Ascent · Dawn window",
+    "generator": "ascent",
+    "presetId": "dawn",
+    "params": {},
+    "device": "iphone",
+    "width": 1290,
+    "height": 2796,
+    "tags": [
+      "ascent",
+      "phone",
+      "sample"
+    ],
+    "previewUrl": "/gallery/ascent-dawn-iphone-notext-preview.webp",
+    "downloadUrl": "/gallery/ascent-dawn-iphone-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T09:42:53.408Z",
+    "source": "samples"
+  },
+  {
+    "id": "ascent-flight-plan-macbook14-notext",
+    "title": "Ascent · Flight plan (light)",
+    "generator": "ascent",
+    "presetId": "flight-plan",
+    "params": {},
+    "device": "macbook14",
+    "width": 3024,
+    "height": 1964,
+    "tags": [
+      "ascent",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/ascent-flight-plan-macbook14-notext-preview.webp",
+    "downloadUrl": "/gallery/ascent-flight-plan-macbook14-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T09:42:53.869Z",
+    "source": "samples"
+  },
+  {
+    "id": "clockwork-escapement-1440p-notext",
+    "title": "Clockwork · Escapement",
+    "generator": "clockwork",
+    "presetId": "escapement",
+    "params": {},
+    "device": "1440p",
+    "width": 2560,
+    "height": 1440,
+    "tags": [
+      "clockwork",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/clockwork-escapement-1440p-notext-preview.webp",
+    "downloadUrl": "/gallery/clockwork-escapement-1440p-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T09:42:54.072Z",
+    "source": "samples"
+  },
+  {
+    "id": "clockwork-brass-iphone-notext",
+    "title": "Clockwork · Brass (solid)",
+    "generator": "clockwork",
+    "presetId": "brass",
+    "params": {},
+    "device": "iphone",
+    "width": 1290,
+    "height": 2796,
+    "tags": [
+      "clockwork",
+      "phone",
+      "sample"
+    ],
+    "previewUrl": "/gallery/clockwork-brass-iphone-notext-preview.webp",
+    "downloadUrl": "/gallery/clockwork-brass-iphone-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T09:42:54.259Z",
+    "source": "samples"
+  },
+  {
+    "id": "clockwork-drafting-macbook14-notext",
+    "title": "Clockwork · Drafting (light)",
+    "generator": "clockwork",
+    "presetId": "drafting",
+    "params": {},
+    "device": "macbook14",
+    "width": 3024,
+    "height": 1964,
+    "tags": [
+      "clockwork",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/clockwork-drafting-macbook14-notext-preview.webp",
+    "downloadUrl": "/gallery/clockwork-drafting-macbook14-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T09:42:54.574Z",
+    "source": "samples"
+  },
+  {
+    "id": "trinetra-agni-1440p-notext",
+    "title": "Trinetra · Agni",
+    "generator": "trinetra",
+    "presetId": "agni",
+    "params": {
+      "text.none": true
+    },
+    "device": "1440p",
+    "width": 2560,
+    "height": 1440,
+    "tags": [
+      "trinetra",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/trinetra-agni-1440p-notext-preview.webp",
+    "downloadUrl": "/gallery/trinetra-agni-1440p-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T10:07:52.733Z",
+    "source": "samples"
+  },
+  {
+    "id": "trinetra-dhyana-iphone-notext",
+    "title": "Trinetra · Dhyana (closed)",
+    "generator": "trinetra",
+    "presetId": "dhyana",
+    "params": {
+      "text.none": true
+    },
+    "device": "iphone",
+    "width": 1290,
+    "height": 2796,
+    "tags": [
+      "trinetra",
+      "phone",
+      "sample"
+    ],
+    "previewUrl": "/gallery/trinetra-dhyana-iphone-notext-preview.webp",
+    "downloadUrl": "/gallery/trinetra-dhyana-iphone-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T10:07:53.614Z",
+    "source": "samples"
+  },
+  {
+    "id": "trinetra-kashi-macbook14-notext",
+    "title": "Trinetra · Kashi (light)",
+    "generator": "trinetra",
+    "presetId": "kashi",
+    "params": {
+      "text.none": true
+    },
+    "device": "macbook14",
+    "width": 3024,
+    "height": 1964,
+    "tags": [
+      "trinetra",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/trinetra-kashi-macbook14-notext-preview.webp",
+    "downloadUrl": "/gallery/trinetra-kashi-macbook14-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T10:07:55.166Z",
+    "source": "samples"
+  },
+  {
+    "id": "jyotirlinga-agni-stambha-1440p-notext",
+    "title": "Jyotirlinga · Pillar of fire",
+    "generator": "jyotirlinga",
+    "presetId": "agni-stambha",
+    "params": {
+      "text.none": true
+    },
+    "device": "1440p",
+    "width": 2560,
+    "height": 1440,
+    "tags": [
+      "jyotirlinga",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/jyotirlinga-agni-stambha-1440p-notext-preview.webp",
+    "downloadUrl": "/gallery/jyotirlinga-agni-stambha-1440p-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T10:07:56.166Z",
+    "source": "samples"
+  },
+  {
+    "id": "jyotirlinga-himalaya-iphone-notext",
+    "title": "Jyotirlinga · Snow light",
+    "generator": "jyotirlinga",
+    "presetId": "himalaya",
+    "params": {
+      "text.none": true
+    },
+    "device": "iphone",
+    "width": 1290,
+    "height": 2796,
+    "tags": [
+      "jyotirlinga",
+      "phone",
+      "sample"
+    ],
+    "previewUrl": "/gallery/jyotirlinga-himalaya-iphone-notext-preview.webp",
+    "downloadUrl": "/gallery/jyotirlinga-himalaya-iphone-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T10:07:56.995Z",
+    "source": "samples"
+  },
+  {
+    "id": "jyotirlinga-kumkum-macbook14-notext",
+    "title": "Jyotirlinga · Kumkum",
+    "generator": "jyotirlinga",
+    "presetId": "kumkum",
+    "params": {
+      "text.none": true
+    },
+    "device": "macbook14",
+    "width": 3024,
+    "height": 1964,
+    "tags": [
+      "jyotirlinga",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/jyotirlinga-kumkum-macbook14-notext-preview.webp",
+    "downloadUrl": "/gallery/jyotirlinga-kumkum-macbook14-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T10:07:58.449Z",
+    "source": "samples"
+  },
+  {
+    "id": "sudarshan-sudarshan-1440p-notext",
+    "title": "Sudarshan · Spinning",
+    "generator": "sudarshan",
+    "presetId": "sudarshan",
+    "params": {
+      "text.none": true
+    },
+    "device": "1440p",
+    "width": 2560,
+    "height": 1440,
+    "tags": [
+      "sudarshan",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/sudarshan-sudarshan-1440p-notext-preview.webp",
+    "downloadUrl": "/gallery/sudarshan-sudarshan-1440p-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T10:07:58.915Z",
+    "source": "samples"
+  },
+  {
+    "id": "sudarshan-still-iphone-notext",
+    "title": "Sudarshan · At rest (blue)",
+    "generator": "sudarshan",
+    "presetId": "still",
+    "params": {
+      "text.none": true
+    },
+    "device": "iphone",
+    "width": 1290,
+    "height": 2796,
+    "tags": [
+      "sudarshan",
+      "phone",
+      "sample"
+    ],
+    "previewUrl": "/gallery/sudarshan-still-iphone-notext-preview.webp",
+    "downloadUrl": "/gallery/sudarshan-still-iphone-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T10:07:59.324Z",
+    "source": "samples"
+  },
+  {
+    "id": "sudarshan-gold-leaf-macbook14-notext",
+    "title": "Sudarshan · Gold leaf (light)",
+    "generator": "sudarshan",
+    "presetId": "gold-leaf",
+    "params": {
+      "text.none": true
+    },
+    "device": "macbook14",
+    "width": 3024,
+    "height": 1964,
+    "tags": [
+      "sudarshan",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/sudarshan-gold-leaf-macbook14-notext-preview.webp",
+    "downloadUrl": "/gallery/sudarshan-gold-leaf-macbook14-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T10:07:59.927Z",
+    "source": "samples"
+  },
+  {
+    "id": "padmanabha-pink-lotus-1440p-notext",
+    "title": "Padmanabha · Pink lotus",
+    "generator": "padmanabha",
+    "presetId": "pink-lotus",
+    "params": {
+      "text.none": true
+    },
+    "device": "1440p",
+    "width": 2560,
+    "height": 1440,
+    "tags": [
+      "padmanabha",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/padmanabha-pink-lotus-1440p-notext-preview.webp",
+    "downloadUrl": "/gallery/padmanabha-pink-lotus-1440p-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T10:08:00.520Z",
+    "source": "samples"
+  },
+  {
+    "id": "padmanabha-nilotpala-iphone-notext",
+    "title": "Padmanabha · Blue lotus",
+    "generator": "padmanabha",
+    "presetId": "nilotpala",
+    "params": {
+      "text.none": true
+    },
+    "device": "iphone",
+    "width": 1290,
+    "height": 2796,
+    "tags": [
+      "padmanabha",
+      "phone",
+      "sample"
+    ],
+    "previewUrl": "/gallery/padmanabha-nilotpala-iphone-notext-preview.webp",
+    "downloadUrl": "/gallery/padmanabha-nilotpala-iphone-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T10:08:01.031Z",
+    "source": "samples"
+  },
+  {
+    "id": "padmanabha-dawn-macbook14-notext",
+    "title": "Padmanabha · Dawn (light)",
+    "generator": "padmanabha",
+    "presetId": "dawn",
+    "params": {
+      "text.none": true
+    },
+    "device": "macbook14",
+    "width": 3024,
+    "height": 1964,
+    "tags": [
+      "padmanabha",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/padmanabha-dawn-macbook14-notext-preview.webp",
+    "downloadUrl": "/gallery/padmanabha-dawn-macbook14-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T10:08:01.911Z",
+    "source": "samples"
+  },
+  {
+    "id": "dhruva-long-night-1440p-notext",
+    "title": "Dhruva · Long night",
+    "generator": "dhruva",
+    "presetId": "long-night",
+    "params": {
+      "text.none": true
+    },
+    "device": "1440p",
+    "width": 2560,
+    "height": 1440,
+    "tags": [
+      "dhruva",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/dhruva-long-night-1440p-notext-preview.webp",
+    "downloadUrl": "/gallery/dhruva-long-night-1440p-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T10:08:02.285Z",
+    "source": "samples"
+  },
+  {
+    "id": "dhruva-full-turn-iphone-notext",
+    "title": "Dhruva · A full night",
+    "generator": "dhruva",
+    "presetId": "full-turn",
+    "params": {
+      "text.none": true
+    },
+    "device": "iphone",
+    "width": 1290,
+    "height": 2796,
+    "tags": [
+      "dhruva",
+      "phone",
+      "sample"
+    ],
+    "previewUrl": "/gallery/dhruva-full-turn-iphone-notext-preview.webp",
+    "downloadUrl": "/gallery/dhruva-full-turn-iphone-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T10:08:02.998Z",
+    "source": "samples"
+  },
+  {
+    "id": "dhruva-himalaya-macbook14-notext",
+    "title": "Dhruva · Himalaya",
+    "generator": "dhruva",
+    "presetId": "himalaya",
+    "params": {
+      "text.none": true
+    },
+    "device": "macbook14",
+    "width": 3024,
+    "height": 1964,
+    "tags": [
+      "dhruva",
+      "desktop",
+      "sample"
+    ],
+    "previewUrl": "/gallery/dhruva-himalaya-macbook14-notext-preview.webp",
+    "downloadUrl": "/gallery/dhruva-himalaya-macbook14-notext.png",
+    "hasTextFree": true,
+    "createdAt": "2026-11-15T10:08:03.509Z",
+    "source": "samples"
   }
 ]
