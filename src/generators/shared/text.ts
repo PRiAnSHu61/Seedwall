@@ -4,7 +4,7 @@ import { esc, n, unit } from "./svg";
 
 /* ---------- fonts ---------- */
 
-export const FONT_KEYS = ["serif", "sans", "mono", "grotesk", "display"] as const;
+export const FONT_KEYS = ["serif", "sans", "mono", "grotesk", "display", "hindi"] as const;
 export type FontKey = (typeof FONT_KEYS)[number];
 
 const FALLBACK: Record<FontKey, string> = {
@@ -13,6 +13,7 @@ const FALLBACK: Record<FontKey, string> = {
   mono: "Menlo, Consolas, monospace",
   grotesk: "Helvetica, Arial, sans-serif",
   display: "Georgia, serif",
+  hindi: "'Noto Serif Devanagari', 'Kohinoor Devanagari', serif",
 };
 
 const asFontKey = (v: string): FontKey => ((FONT_KEYS as readonly string[]).includes(v) ? (v as FontKey) : "serif");
@@ -24,16 +25,47 @@ export function fontStack(key: string): string {
   return `${fam.includes(" ") ? `'${fam}'` : fam}, ${FALLBACK[k]}`;
 }
 
+const VIRAMA = 0x94d;
+const isConsonant = (c: number) => c >= 0x915 && c <= 0x939;
+
 /** Width of `text` in px, from the generated metrics table (identical everywhere). */
 export function measure(text: string, font: string, size: number, italic = false): number {
   const face = FONT_METRICS[`${asFontKey(font)}-${italic ? "italic" : "regular"}`];
+  const cps = [...text].map((ch) => ch.codePointAt(0) ?? 63);
   let em = 0;
-  for (const ch of text) {
-    const c = ch.codePointAt(0) ?? 63;
-    em += (c >= 32 && c < 127 ? face?.widths[c - 32] : undefined) ?? 0.56;
+  for (let i = 0; i < cps.length; i++) {
+    const c = cps[i]!;
+    em += (c >= 32 && c < 127 ? face?.widths[c - 32] : c >= 0x900 && c < 0x980 ? face?.deva?.[c - 0x900] : undefined) ?? 0.56;
+    // A conjunct (consonant + virama + consonant) is narrower than its parts: apply the measured correction.
+    const next = cps[i + 2];
+    if (face?.conj && isConsonant(c) && cps[i + 1] === VIRAMA && next !== undefined && isConsonant(next))
+      em += face.conj[(c - 0x915) * 37 + (next - 0x915)] ?? 0;
   }
   return em * size;
 }
+
+/**
+ * Splits a string into Devanagari syllables (a consonant cluster with its vowel signs) and runs of
+ * anything else. resvg misplaces glyphs that follow some vowel signs, so Devanagari text is drawn
+ * one syllable at a time at measured positions; every syllable on its own shapes correctly.
+ */
+export function syllables(text: string): string[] {
+  const out: string[] = [];
+  let prev = 0;
+  for (const ch of text) {
+    const c = ch.codePointAt(0) ?? 0;
+    const deva = c >= 0x900 && c < 0x980;
+    const mark = (c >= 0x900 && c <= 0x903) || (c >= 0x93a && c <= 0x94f && c !== 0x93d) || (c >= 0x951 && c <= 0x957) || c === 0x962 || c === 0x963 || c === 0x200c || c === 0x200d;
+    const prevDeva = prev >= 0x900 && prev < 0x980;
+    const join = out.length > 0 && (mark || (prev === VIRAMA && isConsonant(c)) || (!deva && !prevDeva && prev !== 0));
+    if (join) out[out.length - 1] += ch;
+    else out.push(ch);
+    prev = c;
+  }
+  return out;
+}
+
+export const hasDevanagari = (s: string): boolean => /[\u0900-\u097f]/.test(s);
 
 /* ---------- rich runs: *italic* ---------- */
 
@@ -52,8 +84,19 @@ export function parseRuns(s: string): Run[] {
 const runsWidth = (runs: Run[], font: string, size: number): number =>
   runs.reduce((w, r) => w + measure(r.text, font, size, r.italic), 0);
 
-const runsSvg = (runs: Run[]): string =>
-  runs.map((r) => (r.italic ? `<tspan font-style="italic">${esc(r.text)}</tspan>` : esc(r.text))).join("");
+/** Text content for one line. Devanagari lines are laid out syllable by syllable from `x` (see syllables()). */
+function runsSvg(runs: Run[], x = 0, font = "serif", size = 0): string {
+  if (!runs.some((r) => hasDevanagari(r.text)))
+    return runs.map((r) => (r.italic ? `<tspan font-style="italic">${esc(r.text)}</tspan>` : esc(r.text))).join("");
+  let cx = x;
+  const out: string[] = [];
+  for (const r of runs)
+    for (const syl of syllables(r.text)) {
+      if (syl.trim()) out.push(`<tspan x="${n(cx)}"${r.italic ? ` font-style="italic"` : ""}>${esc(syl)}</tspan>`);
+      cx += measure(syl, font, size, r.italic);
+    }
+  return out.join("");
+}
 
 /* ---------- shared params ---------- */
 
@@ -96,6 +139,7 @@ export function textParams(defaults: Partial<TextParams> = {}): ParamSchema<Text
         { value: "sans", label: "Sans (Inter)" },
         { value: "grotesk", label: "Grotesk (Schibsted)" },
         { value: "mono", label: "Mono (JetBrains)" },
+        { value: "hindi", label: "Hindi (Tiro Devanagari)" },
       ],
       default: defaults["text.font"] ?? "serif",
       group: g,
@@ -206,7 +250,7 @@ export function layoutText(p: TextParams, size: Size, opts: LayoutOptions = {}):
       .map((runs, i) => {
         const w = runsWidth(runs, font, fs);
         const lx = align === "left" ? qx : align === "right" ? qx + qw - w : qx + (qw - w) / 2;
-        return `<text x="${n(lx)}" y="${n(qy + fs * 0.8 + i * lh)}">${runsSvg(runs)}</text>`;
+        return `<text x="${n(lx)}" y="${n(qy + fs * 0.8 + i * lh)}">${runsSvg(runs, lx, font, fs)}</text>`;
       })
       .join("");
     parts.push(`<g font-family="${esc(fam)}" font-size="${n(fs)}" fill="${esc(ink)}">${tspans}</g>`);

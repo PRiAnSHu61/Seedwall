@@ -9,6 +9,7 @@ Every font in this folder is licensed under the **SIL Open Font License, Version
 | `JetBrainsMono-*.ttf` | JetBrains Mono | Copyright 2020 The JetBrains Mono Project Authors | https://github.com/JetBrains/JetBrainsMono |
 | `Lora-*.ttf` | Lora | Copyright 2011 The Lora Project Authors | https://github.com/cyrealtype/Lora-Cyrillic |
 | `SchibstedGrotesk-*.ttf` | Schibsted Grotesk | Copyright 2022 The Schibsted Grotesk Project Authors | https://github.com/schibsted/schibsted-grotesk |
+| `TiroDevanagariHindi-*.ttf` | Tiro Devanagari Hindi | Copyright 2020 The Indigo Project Authors | https://github.com/TiroTypeworks/Indigo |
 
 ---
 
